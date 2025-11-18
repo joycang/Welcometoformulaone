@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIA Formula 1 World Championship 2025-2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header principal */
+        .main-header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .f1-logo {
+            font-size: 2em;
+            font-weight: 100;
+            color: #fff;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .tag-heuer-clock {
+            font-family: 'Courier New', monospace;
+            font-size: 2.5em;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tag-heuer-label {
+            font-size: 0.4em;
+            color: #666;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            background: transparent;
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid #fff;
+            transition: all 0.3s;
+            font-size: 0.8em;
+            justify-self: end;
+        }
+
+        .back-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Bandeau prochaine course */
+        .next-race-banner {
+            background: url(img/SL-092619-23740-39.jpg);
+            padding: 25px 30px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #333;
+        }
+
+        .next-race-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 0;
+        }
+
+        .next-race-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .next-race-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        .next-race-title {
+            font-size: 1.8em;
+            font-weight: 100;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .next-race-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        .next-race-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+        }
+
+        /* Container principal */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .page-title {
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+            color: #fff;
+            font-weight: 100;
+        }
+
+        .seasons-container {
+            display: grid;
+            gap: 80px;
+        }
+
+        .season-section {
+            border-top: 1px solid #333;
+            padding-top: 40px;
+        }
+
+        .season-header {
+            font-size: 1.2em;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .races-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .race-card {
+            background: transparent;
+            border: 1px solid #333;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .race-card:hover {
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .race-card.passed {
+            opacity: 0.5;
+        }
+
+        .race-card.passed:hover {
+            opacity: 1;
+        }
+
+        .race-round {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #666;
+            font-weight: 400;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .race-flag {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .race-name {
+            font-size: 1.2em;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .race-circuit {
+            color: #666;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+
+        .race-date {
+            color: #fff;
+            font-weight: 400;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .race-card.passed .race-date {
+            color: #666;
+        }
+
+        /* Winner overlay avec backdrop-filter */
+        .winner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .race-card.passed:hover .winner-overlay {
+            opacity: 1;
+        }
+
+        .winner-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        .winner-name {
+            font-size: 1.3em;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .races-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .next-race-title {
+                font-size: 1.5em;
+            }
+
+            .tag-heuer-clock {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .back-btn {
+                justify-self: center;
+            }
+
+            .f1-logo {
+                font-size: 1.5em;
+            }
+
+            .tag-heuer-clock {
+                font-size: 1em;
+            }
+
+            .next-race-banner {
+                padding: 20px 15px;
+            }
+
+            .next-race-title {
+                font-size: 1.2em;
+            }
+
+            .next-race-info {
+                font-size: 0.8em;
+                gap: 15px;
+            }
+
+            .races-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .season-header {
+                font-size: 1em;
+            }
+
+            .main-container {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .next-race-title {
+                font-size: 1em;
+            }
+
+            .race-name {
+                font-size: 1em;
+            }
+
+            .race-round {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="f1-logo">FORMULA 1</div>
+            <div class="tag-heuer-clock">
+                <div class="tag-heuer-label">TAG HEUER</div>
+                <div id="clock">--:--:--</div>
+            </div>
+            <a href="index.html" class="back-btn">Menu</a>
+        </div>
+    </header>
+
+    <!-- Bandeau prochaine course -->
+    <div class="next-race-banner" id="nextRaceBanner">
+        <div class="next-race-content">
+            <div class="next-race-label">Prochaine course</div>
+            <div class="next-race-title" id="nextRaceTitle">--</div>
+            <div class="next-race-info">
+                <span id="nextRaceDate">--</span>
+                <span id="nextRaceCircuit">--</span>
+                <span id="nextRaceFlag">--</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="main-container">
+        <h1 class="page-title">Calendrier 2025-2026</h1>
+        
+        <div class="seasons-container">
+            <section class="season-section">
+                <div class="season-header">Saison 2025</div>
+                <div class="races-grid" id="races-2025"></div>
+            </section>
+
+            <section class="season-section">
+                <div class="season-header">Saison 2026</div>
+                <div class="races-grid" id="races-2026"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Horloge TAG Heuer
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Données des courses avec gagnants
+        const grandsPrix = {
+            2025: [
+                { date: '2025-03-16', name: 'Australie', circuit: 'Melbourne', flag: '🇦🇺', winner: 'Lando Norris' },
+                { date: '2025-03-23', name: 'Chine', circuit: 'Shanghai', flag: '🇨🇳', winner: 'Oscar Piastri' },
+                { date: '2025-04-06', name: 'Japon', circuit: 'Suzuka', flag: '🇯🇵', winner: 'Max Verstappen' },
+                { date: '2025-04-13', name: 'Bahreïn', circuit: 'Sakhir', flag: '🇧🇭', winner: 'Oscar Piastri' },
+                { date: '2025-04-20', name: 'Arabie Saoudite', circuit: 'Djeddah', flag: '🇸🇦', winner: 'Oscar Piastri' },
+                { date: '2025-05-04', name: 'Miami', circuit: 'Miami International', flag: '🇺🇸', winner: 'Oscar Piastri' },
+                { date: '2025-05-18', name: 'Émilie-Romagne', circuit: 'Imola', flag: '🇮🇹', winner: 'Max Verstappen' },
+                { date: '2025-05-25', name: 'Monaco', circuit: 'Monte-Carlo', flag: '🇲🇨', winner: 'Lando Norris' },
+                { date: '2025-06-01', name: 'Espagne', circuit: 'Barcelone', flag: '🇪🇸', winner: 'Oscar Piastri' },
+                { date: '2025-06-15', name: 'Canada', circuit: 'Montréal', flag: '🇨🇦', winner: 'Georges Russel' },
+                { date: '2025-06-29', name: 'Autriche', circuit: 'Spielberg', flag: '🇦🇹', winner: 'Lando Norris' },
+                { date: '2025-07-06', name: 'Grande-Bretagne', circuit: 'Silverstone', flag: '🇬🇧', winner: 'Lando Norris' },
+                { date: '2025-07-27', name: 'Belgique', circuit: 'Spa-Francorchamps', flag: '🇧🇪', winner: 'Oscar Piastri' },
+                { date: '2025-08-03', name: 'Hongrie', circuit: 'Budapest', flag: '🇭🇺', winner: 'Lando Norris' },
+                { date: '2025-08-31', name: 'Pays-Bas', circuit: 'Zandvoort', flag: '🇳🇱', winner: 'Oscar Piastri' },
+                { date: '2025-09-07', name: 'Italie', circuit: 'Monza', flag: '🇮🇹', winner: 'Max Verstappen' },
+                { date: '2025-09-21', name: 'Azerbaïdjan', circuit: 'Bakou', flag: '🇦🇿', winner: 'Max Verstappen' },
+                { date: '2025-10-05', name: 'Singapour', circuit: 'Marina Bay', flag: '🇸🇬', winner: 'Georges Russel' },
+                { date: '2025-10-19', name: 'États-Unis', circuit: 'Austin', flag: '🇺🇸', winner: 'Max Verstappen' },
+                { date: '2025-10-26', name: 'Mexique', circuit: 'Mexico', flag: '🇲🇽', winner: 'Max Verstappen' },
+                { date: '2025-11-09', name: 'Brésil', circuit: 'São Paulo', flag: '🇧🇷', winner: 'Lando Norris' },
+                { date: '2025-11-22', name: 'Las Vegas', circuit: 'Las Vegas Strip', flag: '🇺🇸', winner: 'TBD' },
+                { date: '2025-11-30', name: 'Qatar', circuit: 'Lusail', flag: '🇶🇦', winner: 'TBD' },
+                { date: '2025-12-07', name: 'Abu Dhabi', circuit: 'Yas Marina', flag: '🇦🇪', winner: 'TBD' }
+            ],
+            2026: [
+                { date: '2026-03-15', name: 'Australie', circuit: 'Melbourne', flag: '🇦🇺', winner: 'TBD' },
+                { date: '2026-03-22', name: 'Chine', circuit: 'Shanghai', flag: '🇨🇳', winner: 'TBD' },
+                { date: '2026-04-05', name: 'Japon', circuit: 'Suzuka', flag: '🇯🇵', winner: 'TBD' },
+                { date: '2026-04-19', name: 'Bahreïn', circuit: 'Sakhir', flag: '🇧🇭', winner: 'TBD' },
+                { date: '2026-05-03', name: 'Arabie Saoudite', circuit: 'Djeddah', flag: '🇸🇦', winner: 'TBD' },
+                { date: '2026-05-17', name: 'Miami', circuit: 'Miami International', flag: '🇺🇸', winner: 'TBD' },
+                { date: '2026-05-24', name: 'Émilie-Romagne', circuit: 'Imola', flag: '🇮🇹', winner: 'TBD' },
+                { date: '2026-05-31', name: 'Monaco', circuit: 'Monte-Carlo', flag: '🇲🇨', winner: 'TBD' },
+                { date: '2026-06-14', name: 'Espagne', circuit: 'Barcelone', flag: '🇪🇸', winner: 'TBD' },
+                { date: '2026-06-21', name: 'Canada', circuit: 'Montréal', flag: '🇨🇦', winner: 'TBD' },
+                { date: '2026-07-05', name: 'Autriche', circuit: 'Spielberg', flag: '🇦🇹', winner: 'TBD' },
+                { date: '2026-07-19', name: 'Grande-Bretagne', circuit: 'Silverstone', flag: '🇬🇧', winner: 'TBD' },
+                { date: '2026-08-02', name: 'Belgique', circuit: 'Spa-Francorchamps', flag: '🇧🇪', winner: 'TBD' },
+                { date: '2026-08-30', name: 'Hongrie', circuit: 'Budapest', flag: '🇭🇺', winner: 'TBD' },
+                { date: '2026-09-06', name: 'Pays-Bas', circuit: 'Zandvoort', flag: '🇳🇱', winner: 'TBD' },
+                { date: '2026-09-13', name: 'Italie', circuit: 'Monza', flag: '🇮🇹', winner: 'TBD' },
+                { date: '2026-09-27', name: 'Azerbaïdjan', circuit: 'Bakou', flag: '🇦🇿', winner: 'TBD' },
+                { date: '2026-10-04', name: 'Singapour', circuit: 'Marina Bay', flag: '🇸🇬', winner: 'TBD' },
+                { date: '2026-10-25', name: 'États-Unis', circuit: 'Austin', flag: '🇺🇸', winner: 'TBD' },
+                { date: '2026-11-01', name: 'Mexique', circuit: 'Mexico', flag: '🇲🇽', winner: 'TBD' },
+                { date: '2026-11-15', name: 'Brésil', circuit: 'São Paulo', flag: '🇧🇷', winner: 'TBD' },
+                { date: '2026-11-29', name: 'Abu Dhabi', circuit: 'Yas Marina', flag: '🇦🇪', winner: 'TBD' }
+            ]
+        };
+
+        function isDatePassed(dateString) {
+            const gpDate = new Date(dateString);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return gpDate < today;
+        }
+
+        function getNextRace() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const allRaces = [...grandsPrix[2025], ...grandsPrix[2026]];
+            
+            for (let race of allRaces) {
+                const raceDate = new Date(race.date);
+                if (raceDate >= today) {
+                    return race;
+                }
+            }
+            return null;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        function displayNextRace() {
+            const nextRace = getNextRace();
+            if (nextRace) {
+                document.getElementById('nextRaceTitle').textContent = `Grand Prix ${nextRace.name}`;
+                document.getElementById('nextRaceDate').textContent = formatDate(nextRace.date);
+                document.getElementById('nextRaceCircuit').textContent = nextRace.circuit;
+                document.getElementById('nextRaceFlag').textContent = nextRace.flag;
+            }
+        }
+
+        function displayRaces() {
+            [2025, 2026].forEach(year => {
+                const container = document.getElementById(`races-${year}`);
+                grandsPrix[year].forEach((gp, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'race-card';
+                    
+                    if (isDatePassed(gp.date)) {
+                        card.classList.add('passed');
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="race-round">[${String(index + 1).padStart(2, '0')}]</div>
+                        <div class="race-flag">${gp.flag}</div>
+                        <div class="race-name">${gp.name}</div>
+                        <div class="race-circuit">${gp.circuit}</div>
+                        <div class="race-date">${formatDate(gp.date)}</div>
+                        ${isDatePassed(gp.date) && gp.winner !== 'TBD' ? `
+                            <div class="winner-overlay">
+                                <div class="winner-label">Vainqueur</div>
+                                <div class="winner-name">${gp.winner}</div>
+                            </div>
+                        ` : ''}
+                    `;
+                    
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        // Initialisation
+        displayNextRace();
+        displayRaces();
+    </script>
+
+</body>
+</html>

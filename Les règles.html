@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les règles essentielles de la Formule 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        /* En-tête avec logo FIA */
+        .header {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .fia-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .fia-logo:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Titre principal avec animation */
+        .main-title {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            font-weight: 100;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            text-align: center;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+
+        .main-title.visible {
+            opacity: 1;
+        }
+
+        .main-title.hidden {
+            opacity: 0;
+        }
+
+        /* Container horizontal */
+        .horizontal-container {
+            display: flex;
+            height: 100vh;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Section */
+        .section {
+            min-width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Image à gauche */
+        .section-image {
+            width: 50%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .section-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.active .section-image img {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Contenu à droite */
+        .section-content {
+            width: 50%;
+            padding: 80px 100px 80px 60px;
+            overflow-y: auto;
+            max-height: 100vh;
+            position: relative;
+        }
+
+        .section-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .section-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .section-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .section-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .section-content h2 {
+            font-size: 2.5em;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease 0.2s;
+        }
+
+        .section.active .section-content h2 {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-content h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .section-content p {
+            font-size: 1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .section.active .section-content p {
+            opacity: 0.8;
+            transform: translateX(0);
+        }
+
+        .section-content ul {
+            list-style: none;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease 0.6s;
+        }
+
+        .section.active .section-content ul {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-content li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .section-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .section-content strong {
+            font-weight: 400;
+            color: #fff;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table th {
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+        }
+
+        table td {
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #fff;
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Instructions de navigation */
+        .nav-instructions {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            font-weight: 300;
+        }
+
+        /* Liens de navigation */
+        .bottom-links {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .bottom-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .bottom-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .section-image {
+                padding: 40px;
+            }
+
+            .section-content {
+                padding: 60px 60px 60px 40px;
+            }
+
+            .section-content h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .section {
+                flex-direction: column;
+            }
+
+            .section-image {
+                width: 100%;
+                height: 40vh;
+                padding: 30px;
+            }
+
+            .section-content {
+                width: 100%;
+                height: 60vh;
+                padding: 30px 40px;
+            }
+
+            .title-header {
+                height: 80px;
+            }
+
+            .main-title {
+                font-size: 2.5em;
+                letter-spacing: 8px;
+            }
+
+            .section-content h2 {
+                font-size: 1.8em;
+                letter-spacing: 3px;
+                margin-bottom: 25px;
+            }
+
+            .section-content h3 {
+                font-size: 1.2em;
+                margin-top: 20px;
+            }
+
+            .nav-instructions {
+                font-size: 0.75em;
+                bottom: 20px;
+            }
+
+            .bottom-links {
+                bottom: 20px;
+                left: 20px;
+                gap: 15px;
+            }
+
+            .bottom-links a {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                top: 20px;
+                right: 20px;
+            }
+
+            .fia-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1em;
+            }
+
+            .title-header {
+                height: 60px;
+            }
+
+            .main-title {
+                font-size: 1.5em;
+                letter-spacing: 5px;
+                padding: 0 20px;
+            }
+
+            .section-image {
+                height: 35vh;
+                padding: 20px;
+            }
+
+            .section-content {
+                height: 65vh;
+                padding: 25px 30px;
+            }
+
+            .section-content h2 {
+                font-size: 1.5em;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+            }
+
+            .section-content h3 {
+                font-size: 1.1em;
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+
+            .section-content p,
+            .section-content li {
+                font-size: 0.9em;
+                line-height: 1.6;
+            }
+
+            .section-content ul {
+                margin: 15px 0;
+            }
+
+            .section-content li {
+                margin-bottom: 10px;
+            }
+
+            table th,
+            table td {
+                padding: 10px 8px;
+                font-size: 0.85em;
+            }
+
+            .nav-dots {
+                right: 15px;
+                gap: 10px;
+            }
+
+            .nav-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .nav-instructions {
+                display: none;
+            }
+
+            .bottom-links {
+                flex-direction: column;
+                gap: 10px;
+                left: 15px;
+                bottom: 15px;
+            }
+
+            .bottom-links a {
+                padding: 8px 12px;
+                font-size: 0.75em;
+                text-align: center;
+            }
+
+        }
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5em;
+                letter-spacing: 3px;
+            }
+
+            .section-image {
+                height: 30vh;
+                padding: 15px;
+            }
+
+            .section-content {
+                height: 70vh;
+                padding: 20px;
+            }
+
+            .section-content h2 {
+                font-size: 1.3em;
+                letter-spacing: 1px;
+            }
+
+            .section-content h3 {
+                font-size: 1em;
+            }
+
+            .section-content p,
+            .section-content li {
+                font-size: 0.85em;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            table th,
+            table td {
+                padding: 8px 5px;
+            }
+
+            .fia-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 0.9em;
+            }
+
+            .bottom-links a {
+                font-size: 0.7em;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-height: 600px) and (max-width: 768px) {
+            .section-image {
+                height: 25vh;
+            }
+
+            .section-content {
+                height: 75vh;
+                padding: 15px 20px;
+            }
+
+            .section-content h2 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .section-content h3 {
+                font-size: 0.95em;
+                margin-top: 10px;
+            }
+
+            .section-content p,
+            .section-content li {
+                font-size: 0.8em;
+                line-height: 1.5;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête avec titre -->
+    <div class="title-header visible">
+        <h1 class="main-title">Les règles essentielles de la Formule 1</h1>
+    </div>
+
+    <!-- Logo FIA -->
+    <div class="header">
+        <a href="https://www.fia.com" target="_blank" class="fia-logo">FIA</a>
+    </div>
+
+    <!-- Navigation par points -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- Liens de navigation -->
+    <div class="bottom-links">
+        <a href="Leurs évolutions dans le futur.html">Évolutions futures</a>
+        <a href="index.html">Menu</a>
+    </div>
+
+    <!-- Container horizontal -->
+    <div class="horizontal-container" id="container">
+        
+        <!-- Section 1 -->
+        <section class="section active">
+            <div class="section-image">
+                <img src="img/GPdebelgique1962.jpeg" alt="Structure des week-ends">
+            </div>
+            <div class="section-content">
+                <h2>Structure des week-ends de Grand Prix</h2>
+                <p>Un week-end de Grand Prix F1 est un événement de trois jours structuré par des séances d'essais, une session de qualification et la course principale, avec des formats spécifiques pour les week-ends incluant une Course Sprint.</p>
+                
+                <h3>1. Le Format Standard du Week-end (Vendredi à Dimanche)</h3>
+                <p>Le format classique est conçu pour donner aux équipes le temps de régler leurs voitures et aux pilotes de s'habituer au circuit.</p>
+                <ul>
+                    <li><strong>Vendredi : Essais Libres</strong> - Essais Libres 1 (EL1) : Séance d'une heure, souvent utilisée pour des tests aérodynamiques initiaux et la vérification des systèmes.</li>
+                    <li>Essais Libres 2 (EL2) : Séance d'une heure cruciale pour les simulations de qualification (tours rapides) et les simulations de course.</li>
+                    <li><strong>Samedi Matin : Essais Libres 3 (EL3)</strong> - Dernière séance d'une heure. C'est la dernière chance de peaufiner les réglages avant les qualifications.</li>
+                    <li><strong>Samedi Après-midi : Qualifications (Q1, Q2, Q3)</strong> - Session à élimination directe qui détermine la grille de départ.</li>
+                    <li><strong>Dimanche : La Course Principale</strong> - La course du Grand Prix.</li>
+                </ul>
+
+                <h3>2. Les Week-ends de Course Sprint (Format Spécifique)</h3>
+                <ul>
+                    <li><strong>Séance Qualificative Sprint</strong> - Une séance de qualification dédiée qui fixe la grille de départ de la Course Sprint.</li>
+                    <li><strong>La Course Sprint (Samedi Matin)</strong> - Une course courte (environ 100 km, sans arrêt au stand obligatoire) qui attribue des points aux 8 premiers.</li>
+                    <li><strong>Impact sur la Grille</strong> - Les résultats peuvent déterminer la grille de départ de la course principale.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/MonacoGP1985.jpeg" alt="Système de points">
+            </div>
+            <div class="section-content">
+                <h2>Système de points et réglementations</h2>
+                <p>Le système de points est l'élément central qui détermine le classement des Championnats du Monde Pilotes et Constructeurs.</p>
+
+                <h3>1. Attribution des Points</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1er</td><td>25</td></tr>
+                        <tr><td>2e</td><td>18</td></tr>
+                        <tr><td>3e</td><td>15</td></tr>
+                        <tr><td>4e</td><td>12</td></tr>
+                        <tr><td>5e</td><td>10</td></tr>
+                        <tr><td>6e</td><td>8</td></tr>
+                        <tr><td>7e</td><td>6</td></tr>
+                        <tr><td>8e</td><td>4</td></tr>
+                        <tr><td>9e</td><td>2</td></tr>
+                        <tr><td>10e</td><td>1</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Évolution du Système (À partir de 2025)</h3>
+                <ul>
+                    <li><strong>Meilleur Tour</strong> - Le point bonus pour le meilleur tour en course a été supprimé à partir de 2025.</li>
+                    <li><strong>Championnat Constructeurs</strong> - Le score total des deux voitures de chaque écurie est additionné.</li>
+                </ul>
+
+                <h3>3. Sanctions et Pénalités</h3>
+                <ul>
+                    <li><strong>Types d'Infractions</strong> - Faux départs, non-respect des limites, manœuvres dangereuses, arrêts non sécuritaires.</li>
+                    <li><strong>Pénalités de Temps</strong> - Ajout de 5 ou 10 secondes au temps de course total.</li>
+                    <li><strong>Autres Sanctions</strong> - Drive-Through, Stop-and-Go, voire Exclusion (Drapeau Noir).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/DépassementAlonsoButton.jpeg" alt="DRS">
+            </div>
+            <div class="section-content">
+                <h2>Dépassement et DRS</h2>
+                <p>Le DRS (Drag Reduction System) est l'outil principal conçu pour faciliter les dépassements, sous des conditions d'activation très strictes.</p>
+
+                <h3>1. Fonctionnement et Règle d'Activation du DRS</h3>
+                <p>Le DRS permet au pilote d'ouvrir une fente dans l'aileron arrière pour réduire la traînée aérodynamique.</p>
+                <ul>
+                    <li><strong>Zone d'Activation</strong> - Le DRS ne peut être activé que dans des zones spécifiques du circuit.</li>
+                    <li><strong>Condition d'Écart</strong> - Le pilote doit se trouver à moins d'une seconde du pilote précédent au point de détection.</li>
+                    <li><strong>Délai de Course</strong> - Le DRS n'est autorisé qu'après un nombre prédéfini de tours (souvent deux).</li>
+                </ul>
+
+                <h3>2. Rigidité des Ailerons</h3>
+                <ul>
+                    <li><strong>Lien avec le DRS</strong> - Un aileron illégalement flexible pourrait offrir un double avantage sans les contraintes de réglementation.</li>
+                    <li><strong>Vérification Renforcée</strong> - La FIA applique des charges sur les ailerons pour s'assurer que la déformation reste dans les limites autorisées.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/limitedepiste.jpeg" alt="Limites de piste">
+            </div>
+            <div class="section-content">
+                <h2>Surveillance et limites de la piste</h2>
+                <p>Le respect des limites de la piste est surveillé électroniquement et est un facteur déterminant pour la validité d'un temps au tour.</p>
+
+                <h3>1. Les Limites Officielles (Track Limits)</h3>
+                <ul>
+                    <li><strong>Règle de Base</strong> - Au moins une partie du pneu doit être en contact avec le vibreur ou la ligne blanche.</li>
+                    <li><strong>Sanction</strong> - Dépasser les limites pour obtenir un avantage est strictement interdit et pénalisé.</li>
+                    <li><strong>Surveillance</strong> - La FIA utilise des caméras haute fréquence et des capteurs pour détecter les infractions.</li>
+                </ul>
+
+                <h3>2. Le Rôle du Vibrogène et des Murs</h3>
+                <ul>
+                    <li><strong>Vibrogènes (Curbs)</strong> - Situés après la ligne blanche, ils dissuadent les pilotes de rouler trop large.</li>
+                    <li><strong>Murs et Barrières</strong> - Sur les circuits urbains comme Monaco, les murs remplacent les lignes blanches comme facteur dissuasif.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/Monaco2024Perrezout.jpeg" alt="Sécurité">
+            </div>
+            <div class="section-content">
+                <h2>Sécurité comportementale et mécanique</h2>
+                <p>La sécurité est la priorité absolue en Formule 1, guidant à la fois les décisions des pilotes et les ajustements techniques.</p>
+
+                <h3>1. Obligation de Retrait en Cas de Dommages</h3>
+                <ul>
+                    <li><strong>Critères de Danger</strong> - Dommages aérodynamiques ou structurels, aileron mal fixé, pneu crevé.</li>
+                    <li><strong>Action du Pilote</strong> - Ordre direct via le drapeau noir et orange pour rentrer au stand.</li>
+                </ul>
+
+                <h3>2. Le Facteur Chaleur et l'Impact sur le Poids</h3>
+                <ul>
+                    <li><strong>Systèmes de Refroidissement</strong> - Par temps chaud, ajout d'ouvertures sur la carrosserie.</li>
+                    <li><strong>Augmentation du Poids</strong> - L'ajout de systèmes de refroidissement augmente la masse totale du véhicule.</li>
+                    <li><strong>Poids Minimal Réglementaire</strong> - La FIA fixe une limite que la voiture doit respecter.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/testabahrainalpine.jpeg" alt="Essais">
+            </div>
+            <div class="section-content">
+                <h2>Essais, manœuvres et tests</h2>
+                <p>La F1 impose des réglementations strictes concernant le développement et la vérification des voitures.</p>
+
+                <h3>1. Restriction des Essais Annuels</h3>
+                <ul>
+                    <li><strong>Essais de Pré-saison</strong> - Limités à trois à six jours au total.</li>
+                    <li><strong>Essais en Saison</strong> - Pratiquement interdits, sauf pour des événements spécifiques.</li>
+                    <li><strong>Limitation des Kilomètres</strong> - Maximum 15 km pour les démonstrations, 100 km pour le tournage promotionnel.</li>
+                </ul>
+
+                <h3>2. Le Rôle des Simulateurs et des CFD</h3>
+                <ul>
+                    <li><strong>Simulateurs</strong> - Les pilotes passent un temps considérable dans des simulateurs ultra-sophistiqués.</li>
+                    <li><strong>CFD et Soufflerie</strong> - Le développement aérodynamique est effectué via la Dynamique des Fluides Numérique.</li>
+                </ul>
+
+                <h3>3. Le Test de Flexibilité des Ailerons</h3>
+                <ul>
+                    <li><strong>L'Enjeu</strong> - Un aileron flexible est conçu pour se déformer sous la pression, ce qui est illégal.</li>
+                    <li><strong>Le Test</strong> - La FIA effectue des tests de charge rigoureux avec des poids prédéfinis.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="section">
+            <div class="section-image">
+                <img src="img/pneumatique.jpeg" alt="Pneumatiques">
+            </div>
+            <div class="section-content">
+                <h2>Les pneumatiques</h2>
+                <p>La règle fondamentale impose une diversité de gommes utilisées par chaque pilote en condition de course sur piste sèche.</p>
+
+                <h3>L'Obligation</h3>
+                <p>Chaque pilote doit utiliser au moins deux composés de pneus secs différents durant la course (sauf si la pluie intervient).</p>
+
+                <h3>Les Composés Fournis par Pirelli</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Composé</th>
+                            <th>Symbole</th>
+                            <th>Caractéristiques</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tendres (Soft)</td>
+                            <td>🔴 Rouge</td>
+                            <td>Meilleure adhérence, forte dégradation</td>
+                        </tr>
+                        <tr>
+                            <td>Mediums</td>
+                            <td>🟡 Jaune</td>
+                            <td>Compromis entre vitesse et durabilité</td>
+                        </tr>
+                        <tr>
+                            <td>Durs (Hard)</td>
+                            <td>⚪ Blanc</td>
+                            <td>Le plus durable, permet les plus longs relais</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Stratégies d'Arrêt : Undercut et Overcut</h3>
+                <ul>
+                    <li><strong>L'Undercut</strong> - Entrer aux stands un tour plus tôt que l'adversaire pour profiter de pneus neufs.</li>
+                    <li><strong>L'Overcut</strong> - Rester en piste plus longtemps pour creuser l'écart avec des tours constants et rapides.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const sections = document.querySelectorAll('.section');
+        const titleHeader = document.querySelector('.title-header');
+        const navDotsContainer = document.getElementById('navDots');
+        
+        let currentSection = 0;
+        let isScrolling = false;
+
+
+        // Mettre à jour la visibilité des flèches
+        function updateArrowVisibility(content, arrow) {
+            const isAtBottom = content.scrollHeight - content.scrollTop <= content.clientHeight + 50;
+            const isAtTop = content.scrollTop < 50;
+            
+            if (isAtBottom) {
+                arrow.classList.remove('down');
+                arrow.classList.add('up');
+                arrow.setAttribute('onclick', "scrollContent(this, 'up')");
+            } else if (isAtTop) {
+                arrow.classList.remove('up');
+                arrow.classList.add('down');
+                arrow.setAttribute('onclick', "scrollContent(this, 'down')");
+            }
+        }
+
+        // Observer le scroll de chaque section
+        sections.forEach(section => {
+            const content = section.querySelector('.section-content');
+            const arrow = section.querySelector('.scroll-arrow');
+            
+            if (content && arrow) {
+                content.addEventListener('scroll', () => {
+                    updateArrowVisibility(content, arrow);
+                });
+                
+                // Initialiser la visibilité
+                updateArrowVisibility(content, arrow);
+            }
+        });
+
+        // Créer les points de navigation
+        sections.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSection(index));
+            navDotsContainer.appendChild(dot);
+        });
+
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        function goToSection(index) {
+            if (isScrolling) return;
+            isScrolling = true;
+
+            // titre caché après la première section
+            if (index > 0) {
+                titleHeader.classList.remove('visible');
+                titleHeader.classList.add('hidden');
+            } else {
+                titleHeader.classList.remove('hidden');
+                titleHeader.classList.add('visible');
+            }
+
+            currentSection = index;
+            container.style.transform = `translateX(-${index * 100}vw)`;
+
+            // Mise à jour sections
+            sections.forEach((section, i) => {
+                if (i === index) {
+                    section.classList.add('active');
+                    // Réinitialiser le scroll de la section
+                    const content = section.querySelector('.section-content');
+                    if (content) {
+                        content.scrollTop = 0;
+                        const arrow = section.querySelector('.scroll-arrow');
+                        if (arrow) {
+                            arrow.classList.remove('up');
+                            arrow.classList.add('down');
+                            arrow.setAttribute('onclick', "scrollContent(this, 'down')");
+                        }
+                    }
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            // Mettre à jour les points de navigation
+            navDots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 800);
+        }
+
+        // Navigation avec la molette
+        let scrollTimeout;
+        window.addEventListener('wheel', (e) => {
+            const section = sections[currentSection];
+            const content = section.querySelector('.section-content');
+
+            const atTop = content.scrollTop === 0;
+            const atBottom = Math.ceil(content.scrollTop + content.clientHeight) >= content.scrollHeight;
+
+            // Scroll interne : si la section peut encore défiler, on laisse faire
+            if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
+                return; // laisse le scroll vertical interne agir
+            }
+
+            // Sinon : changer de section
+            if (e.deltaY > 0 && currentSection < sections.length - 1) {
+                goToSection(currentSection + 1);
+            } else if (e.deltaY < 0 && currentSection > 0) {
+                goToSection(currentSection - 1);
+            }
+        });
+
+
+        // Navigation avec les flèches du clavier
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSection < sections.length - 1) {
+                goToSection(currentSection + 1);
+            } else if (e.key === 'ArrowLeft' && currentSection > 0) {
+                goToSection(currentSection - 1);
+            }
+        });
+
+        // Touch support pour mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        window.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        window.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50 && currentSection < sections.length - 1) {
+                goToSection(currentSection + 1);
+            } else if (touchEndX - touchStartX > 50 && currentSection > 0) {
+                goToSection(currentSection - 1);
+            }
+        }
+    </script>
+</body>
+</html>

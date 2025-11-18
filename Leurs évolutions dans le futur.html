@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome To Formula One</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS */
+        :root {
+            --color-primary: #00e0ff; /* Cyan/Bleu électrique */
+            --color-secondary: #00bfff; 
+            --color-text: #e5e5e5;
+            --color-background: #000;
+            --color-dark-surface: rgba(10, 10, 10, 0.95); /* Plus sombre pour la lisibilité sur vidéo */
+            --color-border: #1a1a1a;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.7;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Structure de la page */
+        header, main, footer, .back-to-top {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            background-color: var(--color-dark-surface); 
+            padding: 20px 30px;
+            border-radius: 5px;
+            border: 1px solid var(--color-border);
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Centrage des titres dans leurs conteneurs */
+        header { 
+            text-align: center; /* Centrage du h1 */
+            animation-delay: 0.2s; 
+            margin-bottom: 30px; 
+            margin-top: 20px;
+        }
+        main { 
+            animation-delay: 0.4s; 
+            margin-top: 20px; 
+            padding: 40px 30px;
+        }
+        main h2 {
+            text-align: center; /* Centrage du h2 */
+        }
+        footer { 
+            animation-delay: 0.6s; 
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Typographie */
+        h1, h2, h3 { 
+            color: var(--color-text); 
+            margin-bottom: 8px; 
+            letter-spacing: 1px; 
+            text-transform: uppercase;
+        }
+
+        /* Liste des évolutions */
+        ul { 
+            list-style: none; 
+            margin-top: 20px; 
+            padding: 0;
+        }
+        
+        ul li { 
+            background: none; 
+            padding: 25px 0; 
+            border-bottom: 1px solid var(--color-border); 
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Ajout de transform */
+            opacity: 0; /* Pour l'animation staggered */
+            animation: slideIn 0.6s ease forwards;
+        }
+        
+        /* NOUVEAU: Délai d'animation staggered pour chaque élément de liste */
+        ul li:nth-child(1) { animation-delay: 0.8s; }
+        ul li:nth-child(2) { animation-delay: 0.9s; }
+        ul li:nth-child(3) { animation-delay: 1.0s; }
+        ul li:nth-child(4) { animation-delay: 1.1s; }
+        ul li:nth-child(5) { animation-delay: 1.2s; }
+        ul li:nth-child(6) { animation-delay: 1.3s; }
+        ul li:nth-child(7) { animation-delay: 1.4s; }
+        ul li:nth-child(8) { animation-delay: 1.5s; }
+        ul li:nth-child(9) { animation-delay: 1.6s; }
+        ul li:nth-child(10) { animation-delay: 1.7s; }
+        
+        ul li:hover { 
+            background-color: #0d0d0d; 
+            opacity: 1; 
+            transform: translateX(5px); /* Animation au survol */
+        }
+
+        h3 { 
+            color: var(--color-primary); 
+            margin-bottom: 8px; 
+            font-size: 1.2rem; 
+            font-weight: 500;
+        }
+        
+        /* Sous-lignage animé professionnel */
+        h1, h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        h1::after, h2::after { 
+            content: ""; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            /* Centrage de la ligne sous les titres centrés */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Fin du centrage */
+            width: 0%; 
+            height: 2px;
+            background: var(--color-secondary); 
+            animation: underline 1.2s ease forwards; 
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes underline {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* NOUVEAU: Animation pour les éléments de liste */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Style du bouton de retour */
+        .back-to-top {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .button-pro {
+            display: inline-block;
+            padding: 15px 35px;
+            background: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            border-radius: 4px;
+            font-size: 1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .button-pro:hover {
+            background: var(--color-primary);
+            color: var(--color-background);
+            transform: scale(1.02);
+        }
+            /* Logo FIA en haut à gauche */
+        .fia-logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 70px; /* Ajuste la taille du logo ici */
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .fia-logo:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    
+   <a href="https://www.fia.com/F126" target="_blank">
+    <img src="img/fia-footer-logo.jpeg"
+         alt="FIA Logo" 
+         class="fia-logo">
+</a>
+
+    <header>
+        <h1>F1 2026 : Les évolutions</h1>
+    </header>
+
+    <main>
+        <h2>Les principales modifications de la formule 1 pour la saison 2026</h2>
+        <ul>
+            <li>
+                <h3>L'Unité de Puissance (Moteur) devient 50% Thermique / 50% Électrique</h3>
+                <p>L'équilibre des performances est inversé : la puissance du Moteur à Combustion Interne (ICE) est réduite à environ 400 kW (540 ch), tandis que la puissance électrique du MGU-K est triplée pour atteindre 350 kW (470 ch), créant un véritable moteur hybride performant.</p>
+            </li>
+
+            <li>
+                <h3>Suppression du MGU-H</h3>
+                <p>Le Motor Generator Unit - Heat (MGU-H), l'élément le plus complexe et coûteux de l'hybride actuel (récupération d'énergie des gaz d'échappement), est supprimé. Ceci vise à simplifier la conception et à attirer de nouveaux motoristes.</p>
+            </li>
+
+            <li>
+                <h3>Adoption d'un Carburant 100% Durable</h3>
+                <p>La F1 passera à un carburant entièrement synthétique ou biocarburant. Ce changement majeur permet à la discipline d'atteindre la neutralité carbone d'ici 2030 et de se positionner comme un laboratoire pour l'avenir énergétique de l'automobile.</p>
+            </li>
+
+            <li>
+                <h3>Les Monoplaces deviennent Plus Légères et Plus Compactes</h3>
+                <p>L'objectif est de réduire le poids minimum d'environ 30 kg, visant 768 kg. L'empattement maximal est réduit de 3600 mm à 3400 mm et la largeur de 2000 mm à 1900 mm. Ces voitures, dites "agiles", sont conçues pour améliorer la maniabilité.</p>
+            </li>
+
+            <li>
+                <h3>Introduction de l'Aérodynamique Active (Modes Z et X)</h3>
+                <p>Les ailerons avant et arrière seront mobiles. Le "Mode Z" (appui maximal) sera utilisé dans les virages, tandis que le "Mode X" (traînée minimale) sera activé en ligne droite pour compenser la perte de puissance thermique et garantir des vitesses de pointe élevées.</p>
+            </li>
+
+            <li>
+                <h3>Le DRS est Remplacé par l'« Override Mode » Électrique</h3>
+                <p>Pour faciliter les dépassements, le DRS est remplacé par un système tactique : l'Override Mode. Lorsqu'il est proche d'un concurrent, le pilote bénéficie d'un surcroît d'énergie électrique (boost) temporaire, lui offrant une puissance supérieure pour attaquer.</p>
+            </li>
+
+            <li>
+                <h3>Attirer de Nouveaux Constructeurs (Audi, Red Bull Powertrains)</h3>
+                <p>La simplification du moteur (suppression du MGU-H) et la transition vers une technologie pertinente pour l'industrie ont été décisives pour l'arrivée d'Audi et la création de Red Bull Ford Powertrains, augmentant la concurrence parmi les motoristes.</p>
+            </li>
+
+            <li>
+                <h3>Amélioration du Spectacle et de la Proximité en Piste</h3>
+                <p>Les voitures plus compactes et l'aérodynamique simplifiée visent à réduire les turbulences (l'air sale) subies par la voiture suiveuse. Le but est de permettre aux pilotes de se suivre de plus près, rendant la course plus serrée et les dépassements moins risqués.</p>
+            </li>
+
+            <li>
+                <h3>Une Gestion d'Énergie en Course plus Cruciale que Jamais</h3>
+                <p>Avec le MGU-H supprimé, la recharge de la batterie dépendra presque entièrement de la récupération cinétique (freinage). Les pilotes devront gérer l'énergie électrique avec une précision chirurgicale pour ne pas manquer de puissance sur les longues lignes droites, ce qui pourrait bouleverser la stratégie de course.</p>
+            </li>
+
+            <li>
+                <h3>Risque de Hiérarchisation Totale (Scénario 2014)</h3>
+                <p>Tout changement de règlement moteur majeur induit un risque qu'un motoriste trouve une interprétation technique largement supérieure aux autres (comme Mercedes en 2014). Les équipes ayant le motoriste le plus performant prendront une avance considérable, bouleversant potentiellement la hiérarchie actuelle.</p>
+            </li>
+        </ul>
+
+        <footer>
+            <p>En conclusion, 2026 est ses nouvelles réglementations dans le monde de la formule 1,tente de concilier la haute technologie et la responsabilité environnementale. Fred Vasseur , team principal de ferrari à part ailleurs confier les difficultés techniques liés à ces changements : "Aujourd'hui, nous devons repartir de zéro sur tout : nouveaux pneus, nouveau carburant, nouveau moteur, nouveau châssis, nouvelles réglementations sportives – tout est nouveau. C'est assez difficile."</p>
+        </footer>
+    </main>
+    
+    <div class="back-to-top">
+    <a href="#" class="button-pro" onclick="window.history.back(); return false;">
+        &larr; Les règles
+    </a>
+
+    <a href="Les dates.html" class="button-pro" style="margin-left: 15px;">
+        Les dates →
+    </a>
+</div>
+
+</body>
+</html>

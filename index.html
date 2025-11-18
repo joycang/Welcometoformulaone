@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To Formula One</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Menu de navigation fixe */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 0px 0px;
+            z-index: 1000;
+            transition: all 0.7s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* NOUVEAU CONTENEUR POUR LE LOGO TH ET L'HORLOGE */
+        .logo-clock-group {
+            display: flex;
+            align-items: center; /* Pour centrer verticalement */
+            justify-content: flex-start; /* Pour s'assurer que c'est bien à gauche */
+            gap: 10px; 
+        }
+
+        /* Style de l'image TAG Heuer dans le nouveau groupe */
+        .logo-clock-group img {
+            height: 40px;
+            opacity: 0.8;
+        }
+
+        .clock {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            /* display: flex; et align-items: center; sont maintenant dans .logo-clock-group */
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px; 
+        }
+
+        /* Le reste du CSS... */
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #000 url('img/pexels-jonathanborba-34680426.jpg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            text-align: center;
+            margin-bottom: 80px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            z-index: 1;
+        }
+
+        .hero .subtitle {
+            font-size: 19px;
+            color: #ffffff;
+            margin-bottom: -1px;
+            z-index: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .official-link {
+            display: inline-block;
+            margin-top: 100px;
+            padding: 15px 40px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            z-index: 1;
+            border: 1px solid #fff;
+        }
+
+        .official-link:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Sections avec animations au scroll */
+        .section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 50px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease;
+            background: #000;
+            position: relative;
+        }
+
+        /* Ligne de séparation entre les sections */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Ligne de séparation entre les sections */
+        li {
+            position: relative;
+        }
+
+        li::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: #333;
+        }
+
+        /* Pas de ligne après la dernière section */
+        li:last-child::after {
+            display: none;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .section-text {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Section 1 et 3 (Le Commencement, Les Règles) - alignement à gauche */
+        li:nth-child(odd) .section-content {
+            flex-direction: row;
+        }
+
+        li:nth-child(odd) .section-text {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Section 2 et 4 (Les Bases, Les Dates) - alignement à droite */
+        li:nth-child(even) .section-content {
+            flex-direction: row-reverse;
+        }
+
+        li:nth-child(even) .section-text {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .section-text .number {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .section-text h2 {
+            font-size: 80px;
+            margin-bottom: 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 100;
+        }
+
+        .section-text h2 a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .section-text h2 a:hover {
+            color: #888;
+        }
+
+        .section-text p {
+            font-size: 12px;
+            line-height: 1,5;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 400;
+            max-width: 400px;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .section-text h2 {
+                font-size: 50px;
+            }
+
+            .section-text {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-text p {
+                max-width: max-content;
+            }
+
+            .section-content {
+                flex-direction: column !important;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .nav-container {
+                display: inline;
+                gap: 10px;
+            }
+            .nav-container img {
+                height : 20px;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+
+            .clock {
+                font-size: 14px;
+            }
+
+            .section:nth-child(2) .section-text,
+            .section:nth-child(4) .section-text {
+                padding-left: 0;
+            }
+        }
+
+        /* Effet de chargement */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 5px solid #333;
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<hero>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo-clock-group">
+                <img src="img/TAG_Heuer_Logo.jpeg" alt = 'TH logo'>
+                <div class="clock">Current time:
+                    <div id="clock">--:--:--</div>
+                </div>
+            </div>
+            
+            <div class="logo">
+                <img src="https://logos-world.net/wp-content/uploads/2023/12/F1-Logo.png" alt="Formula 1 Logo">
+            </div>
+        </div>
+    </nav>
+</hero>
+<body>
+    <section class="hero">
+        <h1>Welcome to Formula One</h1>
+        <p class="subtitle">Découvrez l'univers passionnant de la course automobile</p>
+        <a href="https://www.formula1.com/" target="_blank" class="official-link">Site Officiel de la Formule 1</a>
+    </section>
+<ul>
+    <li>
+        <section class="section" data-section>
+            <div class="section-content">
+                <div class="section-text">
+                    <span class="number">[1]</span>
+                    <h2><a href="Le commencement.html">Le Commencement</a></h2>
+                    <p>La Formule 1 est née en 1950, marquant le début d'une légende sportive qui a captivé des millions de fans à travers le monde. Des premiers circuits mythiques aux innovations technologiques révolutionnaires, découvrez comment tout a commencé.</p>
+                </div>
+            </div>
+        </section>
+    </li>
+    <li>
+        <section class="section" data-section>
+            <div class="section-content">
+                <div class="section-text">
+                    <span class="number">[2]</span>
+                    <h2><a href="Les bases.html">Les Bases</a></h2>
+                    <p>Comprendre la F1, c'est maîtriser les fondamentaux : les monoplaces ultra-performantes, les stratégies de course, les arrêts aux stands chronométrés à la milliseconde, et le rôle crucial de chaque membre de l'équipe.</p>
+                </div>
+            </div>
+        </section>
+    </li>
+    <li>
+        <section class="section" data-section>
+            <div class="section-content">
+                <div class="section-text">
+                    <span class="number">[3]</span>
+                    <h2><a href="Les règles.html">Les Règles</a></h2>
+                    <p>La F1 obéit à un règlement strict et complexe qui évolue chaque saison. Des points attribués aux drapeaux de course, en passant par les pénalités et le budget cap, découvrez ce qui régit ce sport de haut niveau.</p>
+                </div>
+            </div>
+        </section>
+    </li>
+    <li>
+        <section class="section" data-section>
+            <div class="section-content">
+                <div class="section-text">
+                    <span class="number">[4]</span>
+                    <h2><a href="Les dates.html">Les Dates</a></h2>
+                    <p>Le calendrier F1 s'étend sur plusieurs continents avec plus de 20 Grands Prix par saison. De Monaco à Monza, de Silverstone à Suzuka, chaque circuit raconte une histoire unique et offre des défis spectaculaires.</p>
+                </div>
+            </div>
+        </section>
+    </li>
+</ul>
+    <script>
+        // Masquer l'écran de chargement
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+            updateClock(); // Mise à jour initiale de l'heure
+        }); 
+        
+        // heure via API
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        // Animation du menu au scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Observer pour les animations au scroll
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer toutes les sections
+        document.querySelectorAll('[data-section]').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

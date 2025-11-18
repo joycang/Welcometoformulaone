@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To Formula one</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000; 
+            font-family: 'Montserrat', sans-serif;
+            color: #ccc;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- HERO SECTION (TITRE) --- */
+        .hero-section {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000000;
+        }
+
+        .hero-title {
+            font-size: clamp(32px, 10vw, 200px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            position: relative;
+            cursor: default;
+            user-select: none;
+            white-space: nowrap;
+            width: 100%;
+            text-align: center;
+            line-height: 1;
+            perspective: 500px;
+        }
+        
+        .hero-title span {
+            display: inline-block;
+            color: #fff;
+            opacity: 0; 
+            filter: blur(10px);
+            transform: translateY(-50px);
+            animation: blurIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+        }
+        
+        @keyframes blurIn {
+            0% {
+                filter: blur(10px);
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            60% { 
+                filter: blur(5px);
+                opacity: 0.5;
+                transform: translateY(5px);
+            }
+            100% { 
+                filter: blur(0px);
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* --- SECTION DE CONTENU --- */
+        .content-section {
+            min-height: 100vh;
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+
+        /* Texte et contenu */
+        p.parallax-text { 
+            font-size: 16px;
+            line-height: 2;
+            color: #ccc;
+            margin-bottom: 40px;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        strong {
+            color: #e10600;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0 20px 40px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .parallax-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .parallax-text.visible + ul {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        li {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            font-weight: 300;
+        }
+
+        li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #e10600;
+        }
+
+        /* Bouton Menu (CORRIGÉ POUR LE CENTRAGE) */
+        a {
+            display: block; /* Changé de inline-block à block pour le centrage */
+            width: fit-content; /* Prend seulement la largeur du contenu */
+            margin: 60px auto; /* Centre le bouton horizontalement */
+            
+            padding: 15px 50px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 2px solid #e10600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #e10600;
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        a:hover::before {
+            left: 0;
+        }
+
+        a:hover {
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(225, 6, 0, 0.5);
+        }
+
+        
+        /* --- STYLES CAROUSEL (Inchangés) --- */
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #555;
+            border-radius: 24px;
+            padding: 16px;
+            --outer-r: 24px;
+            --p-distance: 12px;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto 60px;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%; 
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .carousel-item {
+            position: relative;
+            display: flex;
+            flex-shrink: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            border: 1px solid #555;
+            border-radius: calc(var(--outer-r) - var(--p-distance));
+            background-color: #0d0716;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-indicators-container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            position: absolute;
+            bottom: 30px; 
+            left: 0;
+            z-index: 2;
+        }
+
+        .carousel-indicators {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px; 
+            justify-content: space-between;
+            padding: 0 32px;
+        }
+
+        .carousel-indicator {
+            height: 10px; 
+            width: 10px; 
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 150ms;
+        }
+
+        .carousel-indicator.active {
+            background-color: #e10600; 
+            transform: scale(1.2);
+        }
+
+        .carousel-indicator.inactive {
+            background-color: #555;
+        }
+
+
+        /* --- STYLES RESTANTS --- */
+        .separator {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e10600, transparent);
+            margin: 80px auto;
+            animation: expandLine 2s ease forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes expandLine {
+            to {
+                width: 80%;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            writing-mode: vertical-rl;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #666;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 2s;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        /* Responsive overrides */
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 300px;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="hero-section">
+        <h2 class="hero-title">
+            <span>F</span><span>U</span><span>N</span><span>D</span><span>A</span><span>M</span><span>E</span><span>N</span><span>T</span><span>A</span><span>L</span><span>S</span>
+        </h2>
+    </div>
+
+
+    <div class="content-section">
+        <div class="content-wrapper">
+            
+            <div class="carousel-container" id="myCarousel">
+                
+                <div class="carousel-track">
+                    <div class="carousel-item">
+                        <img src="img/carrousel1.jpg" alt="Mclaren en limite de piste">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carrousel2.jpg" alt="Lewis Hamilton portant le drapeau des fierté sur son casque">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carrousel3.jpg" alt="Max Verstappen victorieux">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/hamilton-ferrari-753x494.jpg" alt="Lewis Hamilton en rouge Ferrari"> 
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carrousel5.jpg" alt="Monoplace de Carlos Sainz immobilisé après un accident">
+                    </div>
+                </div>
+                
+                <div class="carousel-indicators-container">
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        </div>
+                </div>
+
+            </div>
+            
+            <div class="separator"></div>
+
+            <p class="parallax-text">
+                La Formule 1 est une discipline qui combine haute technologie, pilotage d'élite et stratégie d'équipe. Elle repose sur des piliers fondamentaux.<br><br>
+
+                <strong>L'unité de puissance</strong><br>
+                est le cœur hybride de la Formule 1. Le moteur est un système hybride complexe, désigné sous le terme d'Unité de Puissance (Power Unit), basé sur un V6 turbocompressé de 1,6 litre. <br>Les composants clés incluent :
+            </p>
+
+            <ul>
+                <li>Le Moteur à Combustion Interne (ICE)</li>
+                <li>Le MGU-K (récupération d'énergie cinétique au freinage)</li>
+                <li>Le MGU-H (récupération d'énergie thermique des gaz d'échappement via le turbocompresseur)</li>
+            </ul>
+
+            <p class="parallax-text">
+                Ces systèmes électriques stockent l'énergie dans l'Unité de Stockage d'Énergie (ES). L'optimisation est un exercice de gestion de l'énergie et de la fiabilité, avec des quotas limités de composants autorisés par saison.<br><br>
+
+                <strong>L'aérodynamique</strong><br>
+                est essentielle pour l'avantage compétitif. L'objectif est de générer un maximum d'appui (downforce) pour maximiser l'adhérence en virage, tout en minimisant la traînée (drag) pour optimiser la vitesse en ligne droite. <br><br>L'appui est la force verticale qui plaque la voiture au sol, générée principalement par les ailerons et le diffuseur/plancher (effet de sol). Le DRS (Drag Reduction System) est un dispositif d'aileron arrière mobile qui réduit temporairement la traînée pour faciliter le dépassement sous conditions spécifiques.
+                <br><br><strong>Les monoplaces</strong><br>
+                sont construites autour d'une monocoque en fibre de carbone pour optimiser la rigidité, la résistance et le poids minimal réglementaire.<br><br>
+
+                <strong>La stratégie de course</strong><br>
+                inclut la gestion des pneus et les arrêts aux stands. Le fournisseur unique, Pirelli, fournit des pneumatiques divisés en deux catégories : sec et humide. 
+                <br><br>Pour la piste sèche, trois mélanges sont sélectionnés :
+            </p>
+
+            <ul>
+                <li>Soft (Rouge, adhérence maximale, usure rapide)</li>
+                <li>Medium (Jaune, équilibre)</li>
+                <li>Hard (Blanc, longévité maximale)</li>
+            </ul>
+
+            <p class="parallax-text">
+                La stratégie de pneu détermine le moment optimal pour effectuer l'arrêt obligatoire pour changer de mélange de gomme. 
+                <br><br><strong>L'arrêt au stand (Pit Stop)</strong><br>
+                est une exécution rapide (souvent autour de deux à trois secondes) du changement des quatre roues, critique pour conserver ou gagner une position.
+                <br><br>La F1 <strong>récompense</strong> deux entités par un titre mondial. Le Championnat du Monde des Pilotes (WDC) est le titre individuel. Le Championnat du Monde des Constructeurs (WCC) est le titre d'équipe déterminé par l'addition des points des deux pilotes.
+                <br><br><strong>Le format</strong><br>
+                du week-end inclut les Qualifications (Q1, Q2, Q3) le samedi pour déterminer la grille de départ, processus éliminatoire culminant avec l'attribution de la Pole Position. L'attribution des points se fait aux dix premiers classés (25 pour le 1er, 18 pour le 2e, 15 pour le 3e, etc., jusqu'à 1 pour le 10e), avec un point bonus pour le meilleur tour en course si le pilote termine dans le Top 10.
+            </p>
+
+            <div class="separator"></div>
+
+            <a href="index.html">Menu</a>
+        </div>
+    </div>
+
+    <script>
+        // --- Logique pour l'animation décalée du titre ---
+        (function() {
+            const titleSpans = document.querySelectorAll('.hero-title span');
+            const staggerDelay = 100; 
+
+            titleSpans.forEach((span, index) => {
+                span.style.animationDelay = `${index * staggerDelay}ms`;
+            });
+        })();
+
+
+        // --- SCRIPT POUR LE CAROUSEL (Type "Slider") ---
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track.children);
+        const indicatorsContainer = document.getElementById('carouselIndicators');
+        const intervalTime = 3000; 
+        let currentIndex = 0;
+        let totalItems = items.length;
+        let autoplayInterval;
+
+        // 1. Générer les indicateurs (points)
+        items.forEach((item, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('carousel-indicator');
+            if (index === 0) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.add('inactive');
+            }
+            
+            indicator.addEventListener('click', () => {
+                goToSlide(index);
+                resetAutoplay(); 
+            });
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        const indicators = Array.from(indicatorsContainer.children);
+
+        // 2. Fonction pour aller à une slide spécifique
+        function goToSlide(index) {
+            if (index < 0) index = totalItems - 1;
+            if (index >= totalItems) index = 0;
+            
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+                indicator.classList.toggle('inactive', i !== index);
+            });
+            
+            currentIndex = index;
+        }
+
+        // 3. Fonction pour l'autoplay
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        // 4. Démarrer et réinitialiser l'autoplay
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, intervalTime);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        startAutoplay();
+
+
+        // Script pour l'animation du texte "parallax"
+        const parallaxElements = document.querySelectorAll('.parallax-text');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        parallaxElements.forEach(element => {
+            observer.observe(element);
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Commencement - Formula One</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Styles globaux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #b5b5b5;
+            font-family: 'Montserrat', sans-serif; /* Montserrat reste pour le corps du texte */
+            overflow-x: hidden; 
+            line-height: 1.6;
+            perspective: 1000px; /* Ajoute de la perspective pour les animations 3D */
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header avec titre animé */
+        .header {
+            text-align: center; 
+            padding: 60px 20px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .title {
+            font-family: 'Mont-serrat', sans-serif; 
+            font-size: clamp(2.5em, 8vw, 5em);
+            font-weight: 100; 
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            position: relative;
+            color: #ffffff; 
+        }
+
+        /* Animation de typing pour le titre */
+        .title strong { 
+            display: inline-block; 
+            opacity: 0;
+            font-weight: 700; 
+            color: inherit; 
+            
+        
+            animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* Effet de pop plus prononcé */
+        }
+
+        /* Délai pour l'apparition des lettres - ciblons les spans parent */
+        .title span:nth-child(1) strong { animation-delay: 0.1s; } 
+        .title span:nth-child(2) strong { animation-delay: 0.2s; }
+        .title span:nth-child(3) strong { animation-delay: 0.3s; }
+        .title span:nth-child(4) strong { animation-delay: 0.4s; }
+        .title span:nth-child(5) strong { animation-delay: 0.5s; }
+        .title span:nth-child(6) strong { animation-delay: 0.6s; }
+        .title span:nth-child(7) strong { animation-delay: 0.7s; }
+        .title span:nth-child(8) strong { animation-delay: 0.8s; }
+        .title span:nth-child(9) strong { animation-delay: 0.9s; }
+        .title span:nth-child(10) strong { animation-delay: 1.0s; }
+        .title span:nth-child(11) strong { animation-delay: 1.1s; }
+        .title span:nth-child(12) strong { animation-delay: 1.2s; }
+        .title span:nth-child(13) strong { animation-delay: 1.3s; }
+        .title span:nth-child(14) strong { animation-delay: 1.4s; }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8); 
+            }
+            60% { 
+                transform: translateY(-5px) scale(1.05); 
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Ligne décorative sous le titre */
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: expandLine 1.5s ease forwards 1.5s;
+        }
+
+        @keyframes expandLine {
+            to {
+                width: 300px;
+            }
+        }
+
+        /* Section image */
+        .image-section {
+            position: relative;
+            margin: 80px 0;
+            overflow: hidden; 
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px; 
+            margin: 0 auto;
+            opacity: 0; 
+            
+            animation: slideInFromRight 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+            animation-delay: 0.8s; 
+            transform-style: preserve-3d; 
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(120vw) rotateY(-90deg) scale(0.8) translateZ(-200px); 
+                opacity: 0;
+            }
+            60% {
+                transform: translateX(-20px) rotateY(10deg) scale(1.05) translateZ(50px); 
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(0) rotateY(0deg) scale(1) translateZ(0); 
+                opacity: 1; 
+            }
+        }
+        
+        .image-wrapper img {
+            width: 100%; 
+            height: auto;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(30%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.02);
+            border-color: rgba(225, 6, 0, 0.5);
+            filter: grayscale(0%);
+            box-shadow: 0 20px 60px rgba(225, 6, 0, 0.2);
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Section contenu */
+        .content-section {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .content-section p {
+            font-size: 1.1em;
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            color: #b5b5b5;
+            text-align: justify;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInText 0.8s ease forwards 1s;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section champions */
+        .champions-section {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(255, 216, 214, 0.05), rgba(0, 0, 0, 0.3));
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 2px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInSection 1s ease forwards 1.5s;
+        }
+
+        @keyframes fadeInSection {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .champions-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #3e3e3e, transparent);
+        }
+
+        .champions-section h2 {
+            font-size: 2em;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .champions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .champions-list li {
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+            font-size: 1.05em;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            color: #999;
+        }
+
+        .champions-list li:hover {
+            background: rgb(123, 12, 12);
+            border-left-color: #231817;
+            transform: translateX(10px);
+            color: #fff;
+        }
+
+        .champions-list li strong {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Bouton retour */
+        .back-button {
+            display: inline-block;
+            margin: 80px auto 40px;
+            padding: 15px 40px;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+            font-size: 0.9em;
+            border: 1px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: block;
+            text-align: center;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .back-button:hover {
+            color: #000000;
+        }
+
+        .back-button:hover::before {
+            left: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 40px 15px;
+                margin-bottom: 40px;
+            }
+
+            .title {
+                letter-spacing: 8px;
+            }
+
+            .title::after {
+                animation: expandLine 1.5s ease forwards 1.5s;
+            }
+
+            @keyframes expandLine {
+                to {
+                    width: 150px;
+                }
+            }
+
+            .content-section {
+                margin: 50px auto;
+                padding: 0 15px;
+            }
+
+            .content-section p {
+                font-size: 1em;
+                text-align: left;
+            }
+
+            .champions-section {
+                padding: 40px 20px;
+                margin: 60px 15px;
+            }
+
+            .champions-section h2 {
+                font-size: 1.5em;
+                letter-spacing: 3px;
+            }
+
+            .champions-list li {
+                padding: 15px 20px;
+                font-size: 0.95em;
+            }
+
+            .back-button {
+                margin: 60px auto 30px;
+                padding: 12px 30px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                letter-spacing: 4px;
+            }
+
+            .champions-section h2 {
+                font-size: 1.3em;
+                letter-spacing: 2px;
+            }
+
+            .champions-list li {
+                font-size: 0.9em;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span><strong>L</strong></span><span><strong>E</strong></span><span> </span><span><strong>C</strong></span><span><strong>O</strong></span><span><strong>M</strong></span><span><strong>M</strong></span><span><strong>E</strong></strong></span><span><strong>N</strong></span><span><strong>C</strong></span><span><strong>E</strong></span><span><strong>M</strong></span><span><strong>E</strong></strong></span><span><strong>N</strong></span><span><strong>T</strong></strong></span>
+            </h1>
+        </header>
+
+        <section class="image-section">
+            <div class="image-wrapper">
+                <img src="img/gettyimages-1181830900-612x612.jpg" alt="L'Alfa 158, la formule 1 des années 30 à 50"/>
+                <p class="image-caption">L'Alfa Romeo 158 - Dominatrice de la première saison</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <p>
+                Le tout premier Championnat du monde de Formule 1 s'est déroulé en 1950, du 13 mai au 3 septembre. Après des années de silence dues à la Seconde Guerre mondiale, le sport automobile renaissait de ses cendres. Les défis de l'après-guerre, marqués par des difficultés économiques et des infrastructures endommagées, ont rendu l'organisation d'un championnat international particulièrement ardue. Le coup d'envoi a été donné à Silverstone, au Royaume-Uni. À cette époque, la grille de départ était loin d'être stable : le nombre d'écuries variait à chaque Grand Prix, mêlant les grands constructeurs comme Alfa Romeo et Ferrari à une multitude de petits indépendants et de pilotes privés. C'est d'ailleurs entre ces pilotes que se jouait le titre mondial, puisque le championnat des constructeurs n'existait pas encore. Les monoplaces, quant-à-elles, pouvaient être de composition différentes, le règlement de l'époque n'interdisant aucune spécifications de moteurs.
+            </p>
+        </section>
+
+        <section class="champions-section">
+            <h2>Les Premiers Champions</h2>
+            <ul class="champions-list">
+                <li><strong>Grand Prix de Grande-Bretagne</strong> : Giuseppe Farina (Alfa Romeo)</li>
+                <li><strong>Grand Prix de Monaco</strong> : Juan Manuel Fangio (Alfa Romeo)</li>
+                <li><strong>Grand Prix de Suisse</strong> : Giuseppe Farina (Alfa Romeo)</li>
+                <li><strong>Grand Prix de Belgique</strong> : Juan Manuel Fangio (Alfa Romeo)</li>
+                <li><strong>Grand Prix de France</strong> : Juan Manuel Fangio (Alfa Romeo)</li>
+                <li><strong>Grand Prix d'Italie</strong> : Giuseppe Farina (Alfa Romeo)</li>
+            </ul>
+        </section>
+
+        <a href="index.html" class="back-button">Menu</a>
+    </div>
+</body>
+</html>
