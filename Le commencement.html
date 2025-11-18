@@ -6,7 +6,7 @@
     <title>Le Commencement - Formula One</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         /* Styles globaux */
@@ -19,10 +19,10 @@
         body {
             background: #000;
             color: #b5b5b5;
-            font-family: 'Montserrat', sans-serif; /* Montserrat reste pour le corps du texte */
-            overflow-x: hidden; 
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden; /* Garantit qu'aucune barre de défilement horizontale n'apparaît sur la page */
             line-height: 1.6;
-            perspective: 1000px; /* Ajoute de la perspective pour les animations 3D */
+            perspective: 1000px;
         }
 
         /* Container principal */
@@ -32,37 +32,57 @@
             padding: 40px 20px;
         }
 
-       <style>
-
         /* Header avec titre animé */
         .header {
+            /* Anciens styles */
             text-align: center; 
             padding: 60px 20px;
             margin-bottom: 60px;
             position: relative;
+            
+            /* 🔥 NOUVEAU CENTRAGE FLEXBOX pour le titre */
+            display: flex;
+            justify-content: center; /* Centre le contenu horizontalement */
+            overflow: hidden; /* Coupe le titre s'il dépasse, mais le maintient centré */
         }
-        
+
         .title {
             font-family: 'Aldrich', sans-serif; 
+            
+            /* ✅ RESPONSIVITÉ MAXIMALE : Réduction de la taille de police jusqu'à 1.5em */
             font-size: clamp(1.5em, 8vw, 5em); 
             font-weight: 400; 
             
-            letter-spacing: clamp(3px, 2vw, 15px); 
+            /* ✅ RESPONSIVITÉ MAXIMALE : Réduction de l'espacement jusqu'à 1px */
+            letter-spacing: clamp(1px, 2vw, 15px); 
             
             text-transform: uppercase;
             position: relative;
             color: #ffffff; 
+            
+            /* ✅ Maintient le titre sur une seule ligne (nécessite le overflow: hidden sur .header) */
+            white-space: nowrap; 
+        }
+
+        /* Animation de typing pour le titre */
+        .title .letter { 
+            display: inline-block; /* Utilisation de la structure en `span.letter` pour l'animation */
+            opacity: 0;
+            /* Le font-weight: 700; de l'ancienne version a été retiré, car Aldrich est déjà suffisamment gras. */
+            animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
         
-        /* Animation de typing pour le titre */
-        .title strong { 
-            display: inline-block; 
+        /* Note : Votre structure HTML utilisait <span><strong>L</strong></span>, 
+           tandis que votre CSS (dernière version) ciblait .title .letter. 
+           J'ai réaligné le CSS ci-dessous pour fonctionner avec la structure HTML originale
+           que vous avez fournie (avec <span><strong>), car elle utilise <strong>. */
+        
+        .title strong {
+            display: inline-block;
             opacity: 0;
             font-weight: 700; 
             color: inherit; 
-            
-        
-            animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* Effet de pop plus prononcé */
+            animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
         /* Délai pour l'apparition des lettres - ciblons les spans parent */
@@ -80,6 +100,7 @@
         .title span:nth-child(12) strong { animation-delay: 1.2s; }
         .title span:nth-child(13) strong { animation-delay: 1.3s; }
         .title span:nth-child(14) strong { animation-delay: 1.4s; }
+
 
         @keyframes fadeInUp {
             0% {
@@ -118,6 +139,7 @@
         .image-section {
             position: relative;
             margin: 80px 0;
+            overflow: hidden; 
         }
 
         .image-wrapper {
@@ -254,12 +276,12 @@
             font-size: 1.05em;
             letter-spacing: 1px;
             transition: all 0.4s ease;
-            color: #999;
+            color: #c5c5c5; 
         }
 
         .champions-list li:hover {
-            background: rgb(123, 12, 12);
-            border-left-color: #231817;
+            background: #5b0a0a; 
+            border-left-color: #ff0000;
             transform: translateX(10px);
             color: #fff;
         }
@@ -321,10 +343,8 @@
                 padding: 40px 15px;
                 margin-bottom: 40px;
             }
-
-            .title {
-                letter-spacing: 8px;
-            }
+            
+            /* Les valeurs de letter-spacing sont maintenant gérées par clamp() */
 
             .title::after {
                 animation: expandLine 1.5s ease forwards 1.5s;
@@ -368,8 +388,7 @@
             }
         }
 
-        @media (max-width: 480px) 
-         
+        @media (max-width: 480px) {
             .champions-section h2 {
                 font-size: 1.3em;
                 letter-spacing: 2px;
@@ -418,6 +437,4 @@
         <a href="index.html" class="back-button">Menu</a>
     </div>
 </body>
-</html>
-
-
+</html>        
