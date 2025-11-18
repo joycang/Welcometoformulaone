@@ -1026,7 +1026,7 @@
             const content = section.querySelector('.section-content');
 
             const atTop = content.scrollTop === 0;
-            const atBottom = Math.ceil(content.scrollTop + content.clientHeight) >= content.scrollHeight;
+            const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 20;
 
             // Scroll interne : si la section peut encore défiler, on laisse faire
             if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
@@ -1074,4 +1074,5 @@
     </script>
 </body>
 </html>
+
 
