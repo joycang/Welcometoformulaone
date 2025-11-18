@@ -552,106 +552,110 @@
             }
         }
             @media (max-width: 800px) {
-        .horizontal-container {
-            flex-direction: column;
-            transform: none !important;
-            height: auto;
-            min-width: 100vw;
-            width: 100vw;
-            overflow-x: hidden;
+         body, html {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: auto !important;
         }
-        .section {
+
+        .horizontal-container {
+            display: block !important;
+            flex-direction: column !important;
+            transform: none !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
             width: 100vw !important;
             min-width: 100vw !important;
             height: auto !important;
-            flex-direction: column;
-            display: block;
-            position: static;
+            min-height: 100vh !important;
         }
-        .section-image, .section-content {
-            width: 100% !important;
-            max-width: 100vw;
-            padding: 12vw 4vw 4vw 4vw;
-            margin: 0 auto;
-            height: auto !important;
-            min-height: 0;
-            box-sizing: border-box;
-            display: block;
-        }
-        .section-image {
-            padding: 4vw !important;
+
+        .fia-logo {
+            margin: 0 auto !important;
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            transform: none !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
-        .section-image img {
-            max-width: 98vw;
-            max-height: 38vh;
-            width: auto;
-            height: auto;
+
+
+        .section, .section-image, .section-content {
+            width: 100% !important;
+            height: auto !important;
+            overflow: visible !important;
+            position: static !important;
+            display: block !important;
         }
+
+        .section-image {
+            padding: 4vw !important;
+            text-align: center !important;
+        }
+        .section-image img {
+            max-width: 100% !important;
+            height: auto !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        .section-content h2,
+        .section-content h3,
+        .section-content p,
+        .section-content ul,
+        .section-content li {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
         .section-content {
             padding: 5vw 4vw !important;
-            font-size: 0.95em;
-            overflow-y: visible;
-            max-height: unset;
-            min-height: 0;
+            font-size: 0.95em !important;
+            overflow-y: visible !important;
+            max-height: unset !important;
+            min-height: 0 !important;
         }
+
         .main-title {
             font-size: 1.2em !important;
             letter-spacing: 2px !important;
             padding: 0 10px !important;
             position: static !important;
             transform: none !important;
-            top: unset;
-            left: unset;
-            margin-top: 12vw;
-            text-align: center;
+            margin-top: 12vw !important;
+            text-align: center !important;
         }
         .header, .bottom-links, .nav-dots, .nav-instructions {
             position: static !important;
             transform: none !important;
-            left: auto !important;
-            right: auto !important;
-            top: auto !important;
-            bottom: auto !important;
-            margin-bottom: 4vw;
-            margin-top: 2vw;
+            margin-bottom: 4vw !important;
+            margin-top: 2vw !important;
         }
         .bottom-links {
             flex-direction: column !important;
             gap: 2vw !important;
-            width: 100%;
-            align-items: flex-start;
-            padding-left: 4vw;
-            margin-bottom: 6vw;
-        }
-        .fia-logo {
-            width: 44px !important;
-            height: 44px !important;
-            font-size: 0.92em !important;
-            margin: 0 auto 12px auto !important;
+            width: 100% !important;
+            align-items: flex-start !important;
+            padding-left: 4vw !important;
+            margin-bottom: 6vw !important;
         }
         .nav-dots {
             flex-direction: row !important;
-            width: 100%;
-            justify-content: center;
-            margin-top: 3vw;
+            width: 100% !important;
+            justify-content: center !important;
             gap: 10px !important;
+            margin-top: 3vw !important;
         }
         .nav-dot {
             width: 10px !important;
             height: 10px !important;
         }
-        .section-content h2, .section-content h3 {
-            font-size: 1em !important;
-            letter-spacing: 1px;
-            margin-top: 2vw;
-            margin-bottom: 2vw;
         }
-        table, table th, table td {
-            font-size: 0.9em !important;
-            padding: 6px 3px !important;
-        }
-    }
 
     @media (max-width: 500px) {
         .main-title {
@@ -970,7 +974,7 @@
         const navDots = document.querySelectorAll('.nav-dot');
 
         function goToSection(index) {
-            if (isScrolling) return;
+            if (window.innerWidth<=800) return;
             isScrolling = true;
 
             // titre caché après la première section
@@ -1022,6 +1026,7 @@
         // Navigation avec la molette
         let scrollTimeout;
         window.addEventListener('wheel', (e) => {
+            if (window.innerWidth <= 800) return;
             const section = sections[currentSection];
             const content = section.querySelector('.section-content');
 
@@ -1044,6 +1049,7 @@
 
         // Navigation avec les flèches du clavier
         window.addEventListener('keydown', (e) => {
+            if (window.innerWidth <= 800) return;
             if (e.key === 'ArrowRight' && currentSection < sections.length - 1) {
                 goToSection(currentSection + 1);
             } else if (e.key === 'ArrowLeft' && currentSection > 0) {
@@ -1060,6 +1066,7 @@
         });
 
         window.addEventListener('touchend', (e) => {
+            if (window.innerWidth <= 800) return;
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
@@ -1074,4 +1081,3 @@
     </script>
 </body>
 </html>
-
