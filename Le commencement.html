@@ -32,6 +32,8 @@
             padding: 40px 20px;
         }
 
+       <style>
+
         /* Header avec titre animé */
         .header {
             text-align: center; 
@@ -39,17 +41,19 @@
             margin-bottom: 60px;
             position: relative;
         }
-
+        
         .title {
-            font-family: 'Mont-serrat', sans-serif; 
-            font-size: clamp(2.5em, 8vw, 5em);
-            font-weight: 100; 
-            letter-spacing: 15px;
+            font-family: 'Aldrich', sans-serif; 
+            font-size: clamp(2.5em, 8vw, 5em); 
+            font-weight: 400; 
+            
+            letter-spacing: clamp(5px, 2vw, 15px); 
+            
             text-transform: uppercase;
             position: relative;
             color: #ffffff; 
         }
-
+        
         /* Animation de typing pour le titre */
         .title strong { 
             display: inline-block; 
@@ -365,11 +369,8 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .title {
-                letter-spacing: 4px;
-            }
-
+        @media (max-width: 480px) 
+         
             .champions-section h2 {
                 font-size: 1.3em;
                 letter-spacing: 2px;
@@ -419,3 +420,4 @@
     </div>
 </body>
 </html>
+
