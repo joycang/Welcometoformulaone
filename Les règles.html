@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -383,7 +382,6 @@
                 font-size: 0.8em;
             }
         }
-
         @media (max-width: 768px) {
             .header {
                 top: 20px;
@@ -474,11 +472,11 @@
                 font-size: 0.75em;
                 text-align: center;
             }
-        }
 
+        }
         @media (max-width: 480px) {
             .main-title {
-                font-size: 1.2em;
+                font-size: 1.5em;
                 letter-spacing: 3px;
             }
 
@@ -493,7 +491,7 @@
             }
 
             .section-content h2 {
-                font-size: 1.2em;
+                font-size: 1.3em;
                 letter-spacing: 1px;
             }
 
@@ -507,7 +505,7 @@
             }
 
             table {
-                font-size: 0.75em;
+                font-size: 0.8em;
             }
 
             table th,
@@ -538,7 +536,7 @@
             }
 
             .section-content h2 {
-                font-size: 1.1em;
+                font-size: 1.2em;
                 margin-bottom: 15px;
             }
 
@@ -552,7 +550,119 @@
                 font-size: 0.8em;
                 line-height: 1.5;
             }
+            @media (max-width: 800px) {
+        .horizontal-container {
+            flex-direction: column;
+            transform: none !important;
+            height: auto;
+            min-width: 100vw;
+            width: 100vw;
+            overflow-x: hidden;
         }
+        .section {
+            width: 100vw !important;
+            min-width: 100vw !important;
+            height: auto !important;
+            flex-direction: column;
+            display: block;
+            position: static;
+        }
+        .section-image, .section-content {
+            width: 100% !important;
+            max-width: 100vw;
+            padding: 12vw 4vw 4vw 4vw;
+            margin: 0 auto;
+            height: auto !important;
+            min-height: 0;
+            box-sizing: border-box;
+            display: block;
+        }
+        .section-image {
+            padding: 4vw !important;
+            text-align: center;
+        }
+        .section-image img {
+            max-width: 98vw;
+            max-height: 38vh;
+            width: auto;
+            height: auto;
+        }
+        .section-content {
+            padding: 5vw 4vw !important;
+            font-size: 0.95em;
+            overflow-y: visible;
+            max-height: unset;
+            min-height: 0;
+        }
+        .main-title {
+            font-size: 1.2em !important;
+            letter-spacing: 2px !important;
+            padding: 0 10px !important;
+            position: static !important;
+            transform: none !important;
+            top: unset;
+            left: unset;
+            margin-top: 12vw;
+            text-align: center;
+        }
+        .header, .bottom-links, .nav-dots, .nav-instructions {
+            position: static !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            margin-bottom: 4vw;
+            margin-top: 2vw;
+        }
+        .bottom-links {
+            flex-direction: column !important;
+            gap: 2vw !important;
+            width: 100%;
+            align-items: flex-start;
+            padding-left: 4vw;
+            margin-bottom: 6vw;
+        }
+        .fia-logo {
+            width: 44px !important;
+            height: 44px !important;
+            font-size: 0.92em !important;
+            margin: 0 auto 12px auto !important;
+        }
+        .nav-dots {
+            flex-direction: row !important;
+            width: 100%;
+            justify-content: center;
+            margin-top: 3vw;
+            gap: 10px !important;
+        }
+        .nav-dot {
+            width: 10px !important;
+            height: 10px !important;
+        }
+        .section-content h2, .section-content h3 {
+            font-size: 1em !important;
+            letter-spacing: 1px;
+            margin-top: 2vw;
+            margin-bottom: 2vw;
+        }
+        table, table th, table td {
+            font-size: 0.9em !important;
+            padding: 6px 3px !important;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .main-title {
+            font-size: 1em !important;
+        }
+        .section-image img {
+            max-height: 28vh;
+        }
+        .section-content {
+            font-size: 0.85em !important;
+        }
+    }
     </style>
 </head>
 <body>
@@ -806,264 +916,6 @@
 
     </div>
 
-    </style>
-</head>
-<body>
-
-    <!-- En-tête avec titre -->
-    <div class="title-header visible">
-        <h1 class="main-title">Les règles essentielles de la Formule 1</h1>
-    </div>
-
-    <!-- Logo FIA -->
-    <div class="header">
-        <a href="https://www.fia.com" target="_blank" class="fia-logo">FIA</a>
-    </div>
-
-    <!-- Navigation par points -->
-    <div class="nav-dots" id="navDots"></div>
-
-    <!-- Flèche de navigation fixe -->
-    <div class="scroll-arrow down" id="mainScrollArrow"></div>
-
-    <!-- Liens de navigation -->
-    <div class="bottom-links">
-        <a href="Leurs évolutions dans le futur.html">Évolutions futures</a>
-        <a href="Première page-1.html">Menu</a>
-    </div>
-
-    <!-- Container horizontal -->
-    <div class="horizontal-container" id="container">
-        
-        <!-- Section 1 -->
-        <section class="section active">
-            <div class="section-image">
-                <img src="img/GPdebelgique1962.jpeg" alt="Structure des week-ends">
-            </div>
-            <div class="section-content">
-                <h2>Structure des week-ends de Grand Prix</h2>
-                <p>Un week-end de Grand Prix F1 est un événement de trois jours structuré par des séances d'essais, une session de qualification et la course principale, avec des formats spécifiques pour les week-ends incluant une Course Sprint.</p>
-                
-                <h3>1. Le Format Standard du Week-end (Vendredi à Dimanche)</h3>
-                <p>Le format classique est conçu pour donner aux équipes le temps de régler leurs voitures et aux pilotes de s'habituer au circuit.</p>
-                <ul>
-                    <li><strong>Vendredi : Essais Libres</strong> - Essais Libres 1 (EL1) : Séance d'une heure, souvent utilisée pour des tests aérodynamiques initiaux et la vérification des systèmes.</li>
-                    <li>Essais Libres 2 (EL2) : Séance d'une heure cruciale pour les simulations de qualification (tours rapides) et les simulations de course.</li>
-                    <li><strong>Samedi Matin : Essais Libres 3 (EL3)</strong> - Dernière séance d'une heure. C'est la dernière chance de peaufiner les réglages avant les qualifications.</li>
-                    <li><strong>Samedi Après-midi : Qualifications (Q1, Q2, Q3)</strong> - Session à élimination directe qui détermine la grille de départ.</li>
-                    <li><strong>Dimanche : La Course Principale</strong> - La course du Grand Prix.</li>
-                </ul>
-
-                <h3>2. Les Week-ends de Course Sprint (Format Spécifique)</h3>
-                <ul>
-                    <li><strong>Séance Qualificative Sprint</strong> - Une séance de qualification dédiée qui fixe la grille de départ de la Course Sprint.</li>
-                    <li><strong>La Course Sprint (Samedi Matin)</strong> - Une course courte (environ 100 km, sans arrêt au stand obligatoire) qui attribue des points aux 8 premiers.</li>
-                    <li><strong>Impact sur la Grille</strong> - Les résultats peuvent déterminer la grille de départ de la course principale.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 2 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/MonacoGP1985.jpeg" alt="Système de points">
-            </div>
-            <div class="section-content">
-                <h2>Système de points et réglementations</h2>
-                <p>Le système de points est l'élément central qui détermine le classement des Championnats du Monde Pilotes et Constructeurs.</p>
-
-                <h3>1. Attribution des Points</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Position</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1er</td><td>25</td></tr>
-                        <tr><td>2e</td><td>18</td></tr>
-                        <tr><td>3e</td><td>15</td></tr>
-                        <tr><td>4e</td><td>12</td></tr>
-                        <tr><td>5e</td><td>10</td></tr>
-                        <tr><td>6e</td><td>8</td></tr>
-                        <tr><td>7e</td><td>6</td></tr>
-                        <tr><td>8e</td><td>4</td></tr>
-                        <tr><td>9e</td><td>2</td></tr>
-                        <tr><td>10e</td><td>1</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>2. Évolution du Système (À partir de 2025)</h3>
-                <ul>
-                    <li><strong>Meilleur Tour</strong> - Le point bonus pour le meilleur tour en course a été supprimé à partir de 2025.</li>
-                    <li><strong>Championnat Constructeurs</strong> - Le score total des deux voitures de chaque écurie est additionné.</li>
-                </ul>
-
-                <h3>3. Sanctions et Pénalités</h3>
-                <ul>
-                    <li><strong>Types d'Infractions</strong> - Faux départs, non-respect des limites, manœuvres dangereuses, arrêts non sécuritaires.</li>
-                    <li><strong>Pénalités de Temps</strong> - Ajout de 5 ou 10 secondes au temps de course total.</li>
-                    <li><strong>Autres Sanctions</strong> - Drive-Through, Stop-and-Go, voire Exclusion (Drapeau Noir).</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/DépassementAlonsoButton.jpeg" alt="DRS">
-            </div>
-            <div class="section-content">
-                <h2>Dépassement et DRS</h2>
-                <p>Le DRS (Drag Reduction System) est l'outil principal conçu pour faciliter les dépassements, sous des conditions d'activation très strictes.</p>
-
-                <h3>1. Fonctionnement et Règle d'Activation du DRS</h3>
-                <p>Le DRS permet au pilote d'ouvrir une fente dans l'aileron arrière pour réduire la traînée aérodynamique.</p>
-                <ul>
-                    <li><strong>Zone d'Activation</strong> - Le DRS ne peut être activé que dans des zones spécifiques du circuit.</li>
-                    <li><strong>Condition d'Écart</strong> - Le pilote doit se trouver à moins d'une seconde du pilote précédent au point de détection.</li>
-                    <li><strong>Délai de Course</strong> - Le DRS n'est autorisé qu'après un nombre prédéfini de tours (souvent deux).</li>
-                </ul>
-
-                <h3>2. Rigidité des Ailerons</h3>
-                <ul>
-                    <li><strong>Lien avec le DRS</strong> - Un aileron illégalement flexible pourrait offrir un double avantage sans les contraintes de réglementation.</li>
-                    <li><strong>Vérification Renforcée</strong> - La FIA applique des charges sur les ailerons pour s'assurer que la déformation reste dans les limites autorisées.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 4 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/limitedepiste.jpeg" alt="Limites de piste">
-            </div>
-            <div class="section-content">
-                <h2>Surveillance et limites de la piste</h2>
-                <p>Le respect des limites de la piste est surveillé électroniquement et est un facteur déterminant pour la validité d'un temps au tour.</p>
-
-                <h3>1. Les Limites Officielles (Track Limits)</h3>
-                <ul>
-                    <li><strong>Règle de Base</strong> - Au moins une partie du pneu doit être en contact avec le vibreur ou la ligne blanche.</li>
-                    <li><strong>Sanction</strong> - Dépasser les limites pour obtenir un avantage est strictement interdit et pénalisé.</li>
-                    <li><strong>Surveillance</strong> - La FIA utilise des caméras haute fréquence et des capteurs pour détecter les infractions.</li>
-                </ul>
-
-                <h3>2. Le Rôle du Vibrogène et des Murs</h3>
-                <ul>
-                    <li><strong>Vibrogènes (Curbs)</strong> - Situés après la ligne blanche, ils dissuadent les pilotes de rouler trop large.</li>
-                    <li><strong>Murs et Barrières</strong> - Sur les circuits urbains comme Monaco, les murs remplacent les lignes blanches comme facteur dissuasif.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 5 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/Monaco2024Perrezout.jpeg" alt="Sécurité">
-            </div>
-            <div class="section-content">
-                <h2>Sécurité comportementale et mécanique</h2>
-                <p>La sécurité est la priorité absolue en Formule 1, guidant à la fois les décisions des pilotes et les ajustements techniques.</p>
-
-                <h3>1. Obligation de Retrait en Cas de Dommages</h3>
-                <ul>
-                    <li><strong>Critères de Danger</strong> - Dommages aérodynamiques ou structurels, aileron mal fixé, pneu crevé.</li>
-                    <li><strong>Action du Pilote</strong> - Ordre direct via le drapeau noir et orange pour rentrer au stand.</li>
-                </ul>
-
-                <h3>2. Le Facteur Chaleur et l'Impact sur le Poids</h3>
-                <ul>
-                    <li><strong>Systèmes de Refroidissement</strong> - Par temps chaud, ajout d'ouvertures sur la carrosserie.</li>
-                    <li><strong>Augmentation du Poids</strong> - L'ajout de systèmes de refroidissement augmente la masse totale du véhicule.</li>
-                    <li><strong>Poids Minimal Réglementaire</strong> - La FIA fixe une limite que la voiture doit respecter.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 6 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/testabahrainalpine.jpeg" alt="Essais">
-            </div>
-            <div class="section-content">
-                <h2>Essais, manœuvres et tests</h2>
-                <p>La F1 impose des réglementations strictes concernant le développement et la vérification des voitures.</p>
-
-                <h3>1. Restriction des Essais Annuels</h3>
-                <ul>
-                    <li><strong>Essais de Pré-saison</strong> - Limités à trois à six jours au total.</li>
-                    <li><strong>Essais en Saison</strong> - Pratiquement interdits, sauf pour des événements spécifiques.</li>
-                    <li><strong>Limitation des Kilomètres</strong> - Maximum 15 km pour les démonstrations, 100 km pour le tournage promotionnel.</li>
-                </ul>
-
-                <h3>2. Le Rôle des Simulateurs et des CFD</h3>
-                <ul>
-                    <li><strong>Simulateurs</strong> - Les pilotes passent un temps considérable dans des simulateurs ultra-sophistiqués.</li>
-                    <li><strong>CFD et Soufflerie</strong> - Le développement aérodynamique est effectué via la Dynamique des Fluides Numérique.</li>
-                </ul>
-
-                <h3>3. Le Test de Flexibilité des Ailerons</h3>
-                <ul>
-                    <li><strong>L'Enjeu</strong> - Un aileron flexible est conçu pour se déformer sous la pression, ce qui est illégal.</li>
-                    <li><strong>Le Test</strong> - La FIA effectue des tests de charge rigoureux avec des poids prédéfinis.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 7 -->
-        <section class="section">
-            <div class="section-image">
-                <img src="img/pneumatique.jpeg" alt="Pneumatiques">
-            </div>
-            <div class="section-content">
-                <h2>Les pneumatiques</h2>
-                <p>La règle fondamentale impose une diversité de gommes utilisées par chaque pilote en condition de course sur piste sèche.</p>
-
-                <h3>L'Obligation</h3>
-                <p>Chaque pilote doit utiliser au moins deux composés de pneus secs différents durant la course (sauf si la pluie intervient).</p>
-
-                <h3>Les Composés Fournis par Pirelli</h3
-
-                <h3>Les Composés Fournis par Pirelli</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Composé</th>
-                            <th>Symbole</th>
-                            <th>Caractéristiques</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tendres (Soft)</td>
-                            <td>🔴 Rouge</td>
-                            <td>Meilleure adhérence, forte dégradation</td>
-                        </tr>
-                        <tr>
-                            <td>Mediums</td>
-                            <td>🟡 Jaune</td>
-                            <td>Compromis entre vitesse et durabilité</td>
-                        </tr>
-                        <tr>
-                            <td>Durs (Hard)</td>
-                            <td>⚪ Blanc</td>
-                            <td>Le plus durable, permet les plus longs relais</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Stratégies d'Arrêt : Undercut et Overcut</h3>
-                <ul>
-                    <li><strong>L'Undercut</strong> - Entrer aux stands un tour plus tôt que l'adversaire pour profiter de pneus neufs.</li>
-                    <li><strong>L'Overcut</strong> - Rester en piste plus longtemps pour creuser l'écart avec des tours constants et rapides.</li>
-                </ul>
-            </div>
-        </section>
-
-    </div>
-
     <script>
         const container = document.getElementById('container');
         const sections = document.querySelectorAll('.section');
@@ -1221,8 +1073,5 @@
     </script>
 </body>
 </html>
-
-
-
 
 
