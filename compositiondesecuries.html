@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Écuries F1 - Compositions</title>
     <style>
+        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -53,6 +54,7 @@
             animation: fadeInBlur 1s ease-out forwards;
         }
 
+        /* Intro & Roles */
         .intro {
             max-width: 900px;
             margin: 30px auto;
@@ -92,6 +94,7 @@
             margin-bottom: 5px;
         }
 
+        /* Teams Grid */
         .teams-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -166,7 +169,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.08); /* couleur neutre */
+            background: rgba(255,255,255,0.08);
             border: 2px solid rgba(255,255,255,0.15);
             display: flex;
             align-items: center;
@@ -186,6 +189,7 @@
             color: rgba(255,255,255,0.5);
         }
 
+        /* Other roles */
         .other-roles {
             max-width: 900px;
             margin: 60px auto 40px;
@@ -218,9 +222,9 @@
         }
 
         a {
-            display: block; 
-            width: fit-content; 
-            margin: 60px auto; 
+            display: block;
+            width: fit-content;
+            margin: 60px auto;
             padding: 15px 50px;
             background: transparent;
             color: #fff;
@@ -259,105 +263,96 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .teams-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 2rem; }
+            .teams-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Composition des écuries</h1>
-        </header>
+<div class="container">
 
-        <div class="intro animated-content">
-            <h2>L'Organisation d'une écurie</h2>
-            <p>Chaque écurie de Formule 1 est une organisation complexe regroupant des centaines de personnes. Deux rôles clés orchestrent la performance de l'équipe :</p>
-            <div class="roles">
-                <div class="role">
-                    <strong>Team Principal</strong>
-                    Directeur de l'écurie, il prend les décisions stratégiques, gère le budget et représente l'équipe auprès de la FIA et des médias.
-                </div>
-                <div class="role">
-                    <strong>Ingénieur de Course</strong>
-                    En contact radio direct avec le pilote pendant la course, il analyse les données en temps réel et conseille sur la stratégie de course.
+    <header>
+        <h1>Composition des Écuries</h1>
+    </header>
+
+    <div class="intro animated-content">
+        <h2>L'Organisation d'une Écurie</h2>
+        <p>Chaque écurie de Formule 1 est une organisation complexe regroupant des centaines de personnes. Deux rôles clés orchestrent la performance de l'équipe :</p>
+        <div class="roles">
+            <div class="role">
+                <strong>Team Principal</strong>
+                Directeur de l'écurie, il prend les décisions stratégiques, gère le budget et représente l'équipe auprès de la FIA et des médias.
+            </div>
+            <div class="role">
+                <strong>Ingénieur de Course</strong>
+                En contact radio direct avec le pilote pendant la course, il analyse les données en temps réel et conseille sur la stratégie de course.
+            </div>
+        </div>
+    </div>
+
+    <div class="teams-grid animated-content" id="teamsGrid"></div>
+
+    <div class="other-roles animated-content">
+        <h3>Autres Métiers Clés</h3>
+        <ul>
+            <li>Directeur Technique</li>
+            <li>Chef Aérodynamicien</li>
+            <li>Ingénieur Performance</li>
+            <li>Mécaniciens</li>
+            <li>Stratège Course</li>
+            <li>Analystes Données</li>
+            <li>Responsable Logistique</li>
+            <li>Chef Mécanicien</li>
+        </ul>
+    </div>
+
+    <a href="index.html" class="animated-content">Menu</a>
+
+</div>
+
+<script>
+const teams = [
+    { name:"Red Bull Racing", principal:"Laurent Mekies", drivers:[ {name:"Max Verstappen", debut:2015, engineer:"Gianpiero Lambiase", number:"1"}, {name:"Yuki Tsunoda", debut:2011, engineer:"Ernesto Desiderio", number:"22"} ] },
+    { name:"Ferrari", principal:"Frédéric Vasseur", drivers:[ {name:"Charles Leclerc", debut:2018, engineer:"Bryan Bozzi", number:"16"}, {name:"Lewis Hamilton", debut:2007, engineer:"Riccardo Adami", number:"44"} ] },
+    { name:"Mercedes-AMG", principal:"Toto Wolff", drivers:[ {name:"George Russell", debut:2019, engineer:"Marcus Dudley", number:"63"}, {name:"Andrea Kimi Antonelli", debut:2025, engineer:"Peter Bonnington", number:"12"} ] },
+    { name:"McLaren", principal:"Andrea Stella", drivers:[ {name:"Lando Norris", debut:2019, engineer:"Will Joseph", number:"4"}, {name:"Oscar Piastri", debut:2023, engineer:"Tom Stallard", number:"81"} ] },
+    { name:"Aston Martin", principal:"Andy Cowell", drivers:[ {name:"Fernando Alonso", debut:2001, engineer:"Chris Cronk", number:"14"}, {name:"Lance Stroll", debut:2017, engineer:"Ben Michell", number:"18"} ] },
+    { name:"Alpine", principal:"Steve Nielsen", drivers:[ {name:"Pierre Gasly", debut:2017, engineer:"Josh Peckett", number:"10"}, {name:"Franco Colapinto", debut:2024, engineer:"Alex Michaelides", number:"43"} ] },
+    { name:"Williams", principal:"James Vowles", drivers:[ {name:"Alex Albon", debut:2019, engineer:"Gaetan Jego", number:"23"}, {name:"Carlos Sainz", debut:2015, engineer:"Dave Robson", number:"55"} ] },
+    { name:"RB", principal:"Alan Permane", drivers:[ {name:"Liam Lawson", debut:2021, engineer:"Richard Wood", number:"30"}, {name:"Isack Hadjar", debut:2025, engineer:"Pierre Hamelin", number:"6"} ] },
+    { name:"Kick Sauber", principal:"Jonathan Wheatley", drivers:[ {name:"Nico Hülkenberg", debut:2010, engineer:"Mark Slade", number:"27"}, {name:"Gabriel Bortoleto", debut:2025, engineer:"Tom McCullough", number:"5"} ] },
+    { name:"Haas F1 Team", principal:"Ayao Komatsu", drivers:[ {name:"Esteban Ocon", debut:2016, engineer:"Josh Zamett", number:"31"}, {name:"Oliver Bearman", debut:2025, engineer:"Dominic Haines", number:"87"} ] }
+];
+
+const teamsGrid = document.getElementById('teamsGrid');
+
+teams.forEach(team => {
+    const teamCard = document.createElement('div');
+    teamCard.className = 'team-card';
+
+    const driversHTML = team.drivers.map(driver => `
+        <div class="driver">
+            <div class="helmet">${driver.number}</div>
+            <div class="driver-info">
+                <h3>${driver.name}</h3>
+                <div class="driver-details">
+                    Début F1 : ${driver.debut} • Ingénieur : ${driver.engineer}
                 </div>
             </div>
         </div>
+    `).join('');
 
-        <div class="teams-grid animated-content" id="teamsGrid"></div>
-
-        <div class="other-roles animated-content">
-            <h3>Autres Métiers Clés</h3>
-            <ul>
-                <li>Directeur Technique</li>
-                <li>Chef Aérodynamicien</li>
-                <li>Ingénieur Performance</li>
-                <li>Mécaniciens</li>
-                <li>Stratège Course</li>
-                <li>Analystes Données</li>
-                <li>Responsable Logistique</li>
-                <li>Chef Mécanicien</li>
-            </ul>
+    teamCard.innerHTML = `
+        <div class="team-header">
+            <div class="team-name">${team.name}</div>
+            <div class="team-info"><strong>Team Principal :</strong> ${team.principal}</div>
         </div>
+        <div class="drivers">${driversHTML}</div>
+    `;
 
-        <a href="index.html" class="animated-content">Menu</a>
-    </div>
+    teamsGrid.appendChild(teamCard);
+});
+</script>
 
-    <script>
-        const teams = [
-            {
-                name: "Red Bull Racing",
-                principal: "Laurent Mekies",
-                drivers: [
-                    { name: "Max Verstappen", debut: 2015, engineer: "Gianpiero Lambiase", number: "1" },
-                    { name: "Yuki Tsunoda", debut: 2011, engineer: "Ernesto Desiderio", number: "22" }
-                ]
-            },
-            {
-                name: "Ferrari",
-                principal: "Frédéric Vasseur",
-                drivers: [
-                    { name: "Charles Leclerc", debut: 2018, engineer: "Bryan Bozzi", number: "16" },
-                    { name: "Lewis Hamilton", debut: 2007, engineer: "Riccardo Adami", number: "44" }
-                ]
-            }
-        ];
-
-        const teamsGrid = document.getElementById('teamsGrid');
-
-        teams.forEach(team => {
-            const teamCard = document.createElement('div');
-            teamCard.className = 'team-card';
-
-            const driversHTML = team.drivers.map(driver => `
-                <div class="driver">
-                    <div class="helmet">
-                        ${driver.number}
-                    </div>
-                    <div class="driver-info">
-                        <h3>${driver.name}</h3>
-                        <div class="driver-details">
-                            Début F1 : ${driver.debut} • Ingénieur : ${driver.engineer}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            teamCard.innerHTML = `
-                <div class="team-header">
-                    <div class="team-name">${team.name}</div>
-                    <div class="team-info"><strong>Team Principal :</strong> ${team.principal}</div>
-                </div>
-                <div class="drivers">${driversHTML}</div>
-            `;
-
-            teamsGrid.appendChild(teamCard);
-        });
-    </script>
 </body>
 </html>
