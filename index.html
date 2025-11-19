@@ -86,7 +86,7 @@
         }
 
         .hero h1 {
-            font-size: 80px;
+            font-size: 100px;
             text-align: center;
             margin-bottom: 80px;
             color: #ffffff;
@@ -188,7 +188,7 @@
             gap: 20px;
         }
 
-        /* Section 1 et 3 (Le Commencement, Les Règles) - alignement à gauche */
+        /* Section 1, 3 et 5 (Le Commencement, Les Règles, La composition des écuries) - alignement à gauche */
         li:nth-child(odd) .section-content {
             flex-direction: row;
         }
@@ -242,6 +242,14 @@
             font-weight: 400;
             max-width: 400px;
         }
+        
+       
+        li:nth-child(5) .section-text h2 {
+            font-size: 70px; 
+            max-width: none
+        }
+      
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -288,11 +296,6 @@
 
             .clock {
                 font-size: 14px;
-            }
-
-            .section:nth-child(2) .section-text,
-            .section:nth-child(4) .section-text {
-                padding-left: 0;
             }
         }
 
@@ -399,6 +402,16 @@
                     <h2><a href="Les dates.html">Les Dates</a></h2>
                     <p>Le calendrier F1 s'étend sur plusieurs continents avec plus de 20 Grands Prix par saison. De Monaco à Monza, de Silverstone à Suzuka, chaque circuit raconte une histoire unique et offre des défis spectaculaires.</p>
                 </div>
+            </div>
+        </section>
+    </li>
+    <li>
+        <section class="section" data-section>
+            <div class="section-content">
+                <div class="section-text">
+                    <span class="number">[5]</span>
+                    <h2><a href="compositiondesecuries.html">La composition des écuries</a></h2>
+                    <p>Au cœur de la F1, les écuries sont construites avec précision où s’allient technologie de pointe, stratégie millimétrée et quête permanente de performance.</p>
             </div>
         </section>
     </li>
